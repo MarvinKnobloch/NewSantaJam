@@ -1,4 +1,5 @@
 using Events;
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -31,6 +32,7 @@ namespace Santa
 
         #region Properties
         public static GameSettings Settings => settings;
+        public static CheckpointData Checkpoint => Instance.checkpoint;
 
         public static Camera Camera
         {
@@ -42,6 +44,10 @@ namespace Santa
             }
         }
         #endregion
+
+        private Savestate savestate;
+        private CheckpointData checkpoint;
+        private bool awaitSceneLoading;
 
         void Awake()
         {
@@ -83,6 +89,46 @@ namespace Santa
         {
             // TODO: Implement this method
         }
+        public void SceneControllerAwake(LevelStartController levelStart)
+        {
+            if (awaitSceneLoading) SceneLoaded(levelStart);
+        }
+
+        private void SceneLoaded(LevelStartController levelStart)
+        {
+            awaitSceneLoading = false;
+            var currentScene = levelStart.GetScene();
+
+            if (!checkpoint.active || checkpoint.sceneIndex != levelStart.GetScene())
+            {
+                //Debug.Log("Registriere Rücksetzpunkt in Szene " + sc.gameObject.scene.name);
+                CreateCheckpoint(levelStart.gameObject.scene, levelStart.transform);
+
+                savestate.sceneIndex = levelStart.GetScene();
+                savestate.Save();
+            }
+            else
+            {
+                LoadLastCheckpoint();
+                levelStart.transform.SetLocalPositionAndRotation(checkpoint.position, Quaternion.Euler(0, checkpoint.rotation, 0));
+            }
+
+            levelStart.CreatePlayer();
+            gameUI.SetActive(true);
+        }
+
+        public static void ReloadLevel(bool loadCheckpoint)
+        {
+            Instance.checkpoint.active = loadCheckpoint;
+            if (!loadCheckpoint)
+            {
+                Instance.checkpoint.sceneIndex = Instance.savestate.sceneIndex;
+            }
+            Instance.awaitSceneLoading = true;
+
+            Destroy(Player.Instance.gameObject);
+            SceneManager.LoadScene((int)Instance.checkpoint.sceneIndex);
+        }
 
         private void OnDestroy()
         {
@@ -110,6 +156,65 @@ namespace Santa
 #endif
             }
         }
+
+        #region Checkpoints
+        public void CreateCheckpoint(Scene scene, Transform playerSpawnpoint)
+        {
+            var keys = new List<int>(checkpoint.mementos.Keys);
+            for (int i = 0; i < keys.Count; i++)
+            {
+                try
+                {
+                    var m = checkpoint.mementos[keys[i]];
+                    m.data = m.owner.GetData();
+                    checkpoint.mementos[keys[i]] = m;
+                }
+                catch { /* ignore */ }
+            }
+            checkpoint.UpdateCheckpoint(scene, playerSpawnpoint, savestate);
+            Settings.Save();
+        }
+
+        public void AddMementoObject(IMemento owner)
+        {
+            int id = owner.UUID;
+            Memento m;
+            if (checkpoint.mementos.TryGetValue(id, out m))
+            {
+                //Debug.Log("Überschreibe Memento " + owner.gameObject.name + " = " + id);
+                m.owner = owner;
+                checkpoint.mementos[id] = m;
+            }
+            else
+            {
+                //Debug.Log("Neues Memento " + owner.gameObject.name + " = " + id);
+                checkpoint.mementos.Add(id, new Memento(owner));
+            }
+        }
+
+        public void LoadLastCheckpoint()
+        {
+            Debug.Log("LoadLastCheckpoint mit " + checkpoint.mementos.Count + " Datensätzen.");
+            foreach (var memento in checkpoint.mementos.Values)
+            {
+                try
+                {
+                    if (memento.owner != null)
+                        memento.owner.SetData(memento.data);
+                }
+                catch (System.Exception e)
+                {
+                    Debug.LogError(e);
+                }
+            }
+        }
+
+        public void ResetProgress()
+        {
+            checkpoint = new CheckpointData();
+            savestate = new Savestate();
+        }
+        #endregion
 
         public void SetBGMVolume(int volume)
         {

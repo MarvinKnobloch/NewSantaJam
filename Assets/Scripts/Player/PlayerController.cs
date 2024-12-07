@@ -24,9 +24,6 @@ namespace Santa
         [Range(0f, 1f)] public float groundedDist = 0.03f;
         public LayerMask groundLayers = Physics.AllLayers;
 
-        [Space]
-        public Transform cameraAnker;
-
         #region Properties
         public bool IsGrounded { get; private set; }
         public bool OnSlope { get; private set; }
