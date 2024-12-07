@@ -1,27 +1,30 @@
 using UnityEngine;
 
-public class BubbleActor : MonoBehaviour
+namespace Santa
 {
-    public GameObject bubble;
-
-    private Rigidbody rig;
-
-    void Start()
+    public class BubbleActor : MonoBehaviour
     {
-        rig = GetComponent<Rigidbody>();
-    }
+        public GameObject bubble;
 
-    void Update()
-    {
-        if (bubble == null) return;
+        private Rigidbody rig;
 
-        if (Vector3.Distance(transform.position, bubble.transform.position) < bubble.transform.lossyScale.x / 2.0)
+        void Start()
         {
-            rig.excludeLayers = Layers.Mask(Layers.Dimension_1);
+            rig = GetComponent<Rigidbody>();
         }
-        else
+
+        void Update()
         {
-            rig.excludeLayers = 1 << 8;
+            if (bubble == null) return;
+
+            if (Vector3.Distance(transform.position, bubble.transform.position) < bubble.transform.lossyScale.x / 2.0)
+            {
+                rig.excludeLayers = Layers.Mask(Layers.Dimension_1);
+            }
+            else
+            {
+                rig.excludeLayers = 1 << 8;
+            }
         }
     }
 }
