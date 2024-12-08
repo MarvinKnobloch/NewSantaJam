@@ -56,7 +56,7 @@ namespace Santa
 
         void Awake()
         {
-            controls = KeybindManager.inputActions;
+            controls = Keybindinputmanager.inputActions;
             collider = GetComponent<CapsuleCollider>();
             rig = GetComponent<Rigidbody>();
             rig.useGravity = useGravity;

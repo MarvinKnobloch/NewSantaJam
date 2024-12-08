@@ -68,8 +68,10 @@ namespace Santa
             testMode = true;
 #endif
 
-            //DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(gameObject);
             gameUIChannel.OnEventRaised += ActivateGameUI;
+            settings = new GameSettings().Load();
+            ResetProgress();
 
             var sceneValues = System.Enum.GetValues(typeof(SceneEnum));
             var scenes = SceneManager.sceneCountInBuildSettings;
@@ -79,7 +81,9 @@ namespace Santa
                 Application.Quit();
                 return;
             }
+            awaitSceneLoading = true;
         }
+
         private void Start()
         {
             if(Player.Instance != null)
@@ -97,20 +101,21 @@ namespace Santa
         private void SceneLoaded(LevelStartController levelStart)
         {
             awaitSceneLoading = false;
-            var currentScene = levelStart.GetScene();
+            //var currentScene = levelStart.GetScene();
 
-            if (!checkpoint.active || checkpoint.sceneIndex != levelStart.GetScene())
+            // Gibt es einen Checkpoint?
+            if (checkpoint.active && checkpoint.sceneIndex == levelStart.GetScene())
             {
-                //Debug.Log("Registriere Rücksetzpunkt in Szene " + sc.gameObject.scene.name);
+                LoadLastCheckpoint();
+                levelStart.transform.SetLocalPositionAndRotation(checkpoint.position, Quaternion.Euler(0, checkpoint.rotation, 0));
+            }
+            else
+            {
+                Debug.Log("Registriere Rücksetzpunkt in Szene " + levelStart.gameObject.scene.name);
                 CreateCheckpoint(levelStart.gameObject.scene, levelStart.transform);
 
                 savestate.sceneIndex = levelStart.GetScene();
                 savestate.Save();
-            }
-            else
-            {
-                LoadLastCheckpoint();
-                levelStart.transform.SetLocalPositionAndRotation(checkpoint.position, Quaternion.Euler(0, checkpoint.rotation, 0));
             }
 
             levelStart.CreatePlayer();

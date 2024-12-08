@@ -88,7 +88,7 @@ namespace Santa
             isDirty = false;
         }
 
-        public void Load()
+        public GameSettings Load()
         {
             musicVolume = PlayerPrefs.GetInt("MusicVolume", musicVolume);
             soundVolume = PlayerPrefs.GetInt("SoundVolume", soundVolume);
@@ -96,6 +96,7 @@ namespace Santa
             mouseSensitivityX = PlayerPrefs.GetFloat("MouseSensitivityX", mouseSensitivityX);
             mouseSensitivityY = PlayerPrefs.GetFloat("MouseSensitivityY", mouseSensitivityY);
             isDirty = false;
+            return this;
         }
     }
 }
