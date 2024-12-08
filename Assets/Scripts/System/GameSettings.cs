@@ -12,8 +12,8 @@ namespace Santa
         [Range(0, 100)]
         public int audioKeyVolume = 80;
 
-        public float mouseSensitivityX = 0.075f;
-        public float mouseSensitivityY = 0.1f;
+        public float mouseSensitivityX = 0.5f;
+        public float mouseSensitivityY = 0.33f;
 
         // Speicher Flag
         [NonSerialized]
@@ -90,6 +90,7 @@ namespace Santa
 
         public GameSettings Load()
         {
+            Save();
             musicVolume = PlayerPrefs.GetInt("MusicVolume", musicVolume);
             soundVolume = PlayerPrefs.GetInt("SoundVolume", soundVolume);
             audioKeyVolume = PlayerPrefs.GetInt("AudioKeyVolume", audioKeyVolume);

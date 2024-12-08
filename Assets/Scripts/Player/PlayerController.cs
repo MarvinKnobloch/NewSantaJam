@@ -1,3 +1,4 @@
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,8 +12,11 @@ namespace Santa
         public float runSpeed;
         public float jumpStrength = 0.5f;
         public int offGroundJumpFrames = 4;
-
         [Range(0, 90)] public float slopeLimit = 42f;
+
+        public GameObject playerCam;
+        public float maxCameraAngle = 75f;
+        public float minCameraAngle = -75f;
 
         [Header("Physik")]
         public bool useGravity = true;
@@ -77,9 +81,9 @@ namespace Santa
             EnableActionInputs(true);
 
             Mouse.current.WarpCursorPosition(new Vector2(Screen.width / 2, Screen.height / 2));
-            cameraRotation = transform.rotation.eulerAngles;
-            moveVector = Vector3.zero;
-            velocity = Vector3.zero;
+            cameraRotation.y = transform.rotation.eulerAngles.y;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
 
         private void OnDisable()
@@ -131,7 +135,13 @@ namespace Santa
 
         private void ReadRotation(InputAction.CallbackContext ctx)
         {
-            rotationY = ctx.ReadValue<float>();
+            lookVector = ctx.ReadValue<Vector2>();
+        }
+
+        public void ResetCameraMouseDelta()
+        {
+            lookVector = Vector2.zero;
+            cameraRotation = GameManager.Camera.transform.eulerAngles;
         }
 
         public void MoveKinematic()
@@ -191,11 +201,18 @@ namespace Santa
             if (!enabled) return;
             cameraRotation.y += lookVector.x * GameManager.Settings.mouseSensitivityX;
             cameraRotation.x -= lookVector.y * GameManager.Settings.mouseSensitivityY;
-            cameraRotation.x = Mathf.Clamp(cameraRotation.x, -90, 90);
+            cameraRotation.x = Mathf.Clamp(cameraRotation.x, minCameraAngle, maxCameraAngle);
             cameraRotation.z = 0;
 
             rig.rotation = Quaternion.Euler(0, cameraRotation.y, 0);
             lookVector = Vector2.zero;
+        }
+
+
+        private void LateUpdate()
+        {
+            // TWS: Die simpelste Implementierung, die mir spontan einfällt
+            playerCam.transform.eulerAngles = cameraRotation;
         }
 
         public bool IsRunning()
@@ -244,6 +261,8 @@ namespace Santa
                     // Rampe
                     if (gravityPass)
                     {
+                        if (IsGrounded && snapToSurface.y < -1f) snapToSurface.y = -1f;
+
                         // Snippet für Events, die mit dem Boden zu tun haben. Einbrechen des Bodens, etc.
                         /*if (hit.collider.gameObject.TryGetComponent(out IOnStep other))
                         {
@@ -264,6 +283,7 @@ namespace Santa
                     }
                     else
                     {
+                        if (IsGrounded && velocity.y < 0) { velocity.y = 0; leftOver.y = 0; }
                         leftOver = Vector3.ProjectOnPlane(leftOver, hit.normal);
                     }
                 }
