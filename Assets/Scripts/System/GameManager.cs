@@ -68,11 +68,8 @@ namespace Santa
             testMode = true;
 #endif
 
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
             gameUIChannel.OnEventRaised += ActivateGameUI;
-
-            var currentScene = SceneManager.GetActiveScene().buildIndex;
-            gameUI.SetActive(currentScene > 0);
 
             var sceneValues = System.Enum.GetValues(typeof(SceneEnum));
             var scenes = SceneManager.sceneCountInBuildSettings;
@@ -81,6 +78,13 @@ namespace Santa
                 Debug.LogError("Szene Enum ist nicht aktuell! Enums: " + (sceneValues.Length - 1) + " / Szenen: " + scenes);
                 Application.Quit();
                 return;
+            }
+        }
+        private void Start()
+        {
+            if(Player.Instance != null)
+            {
+                gameUI.SetActive(true);
             }
         }
 
