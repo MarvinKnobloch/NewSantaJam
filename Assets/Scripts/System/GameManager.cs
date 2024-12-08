@@ -91,10 +91,6 @@ namespace Santa
         // Wird beim Start jeder neuen Szene aufgerufen
         public void LevelStartControllerAwake(LevelStartController levelStart)
         {
-            // TODO: Implement this method
-        }
-        public void SceneControllerAwake(LevelStartController levelStart)
-        {
             if (awaitSceneLoading) SceneLoaded(levelStart);
         }
 
