@@ -14,6 +14,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MarvinTest.unity
     guid: e8de9c796dd813e488f4bd29aa2b02de
+  - enabled: 1
+    path: Assets/Scenes/TWS_Dummies/Level_1.unity
+    guid: e1596cb77173f7249b6f7532629a033c
+  - enabled: 1
+    path: Assets/Scenes/TWS_Dummies/Level_2.unity
+    guid: 8b174b94a80905840bcc8a1bc0528c7a
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float useDist = 2f;
     [SerializeField] private LayerMask useMask;
     [SerializeField] private float deathFallHeight;
+    [SerializeField] private float deathHeight = -24f;
 
     [Header("Event")]
     [SerializeField] private StringEventChannelSO interactableChannel;
@@ -44,6 +45,11 @@ public class Player : MonoBehaviour
         controller = GetComponent<PlayerController>();
         audio = GetComponent<AudioSource>();
         controller.onUse += OnUse;
+    }
+
+    void Update()
+    {
+        if (transform.position.y < deathHeight) die();
     }
 
     public bool IsRunning()
@@ -87,7 +93,7 @@ public class Player : MonoBehaviour
     {
         if (GameManager.Instance.godmode) return;
         controller.enabled = false;
-        Invoke("Reload", 0.5f);
+        Invoke("Reload", 0.25f);
     }
 
     private void Reload()

@@ -162,6 +162,14 @@ namespace Santa
             }
         }
 
+        public void LoadScene(SceneEnum scene)
+        {
+            Instance.awaitSceneLoading = true;
+
+            Destroy(Player.Instance.gameObject);
+            SceneManager.LoadScene((int)scene);
+        }
+
         #region Checkpoints
         public void CreateCheckpoint(Scene scene, Transform playerSpawnpoint)
         {

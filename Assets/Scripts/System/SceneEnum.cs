@@ -6,7 +6,9 @@ namespace Santa
     {
         Keine = -1,
         Hauptmenü = 0,
+        IntroSzene,
+        MarvinTest,
         Level_1,
-        Credits,
+        Level_2,
     }
 }
