@@ -68,7 +68,7 @@ namespace Santa
             testMode = true;
 #endif
 
-            //DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(gameObject);
             gameUIChannel.OnEventRaised += ActivateGameUI;
 
             var sceneValues = System.Enum.GetValues(typeof(SceneEnum));
@@ -80,13 +80,13 @@ namespace Santa
                 return;
             }
         }
-        private void Start()
-        {
-            if(Player.Instance != null)
-            {
-                gameUI.SetActive(true);
-            }
-        }
+        //private void Start()
+        //{
+        //    if(Player.Instance != null)
+        //    {
+        //        gameUI.SetActive(true);
+        //    }
+        //}
 
         // Wird beim Start jeder neuen Szene aufgerufen
         public void LevelStartControllerAwake(LevelStartController levelStart)

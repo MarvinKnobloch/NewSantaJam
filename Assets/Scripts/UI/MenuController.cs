@@ -13,8 +13,8 @@ public class MenuController : MonoBehaviour
     private GameObject currentOpenMenu;
     [NonSerialized] public bool gameIsPaused;
 
-    [SerializeField] private GameObject MainMenu;
-    [SerializeField] private GameObject IngameMenu;
+    [SerializeField] private GameObject mainMenu;
+    [SerializeField] private GameObject ingameMenu;
 
     private void Awake()
     {
@@ -29,12 +29,12 @@ public class MenuController : MonoBehaviour
 
         if (SceneManager.GetActiveScene().buildIndex == 0)
         {
-            baseMenu = MainMenu;
+            baseMenu = mainMenu;
             baseMenu.SetActive(true);
         }
         else
         {
-            baseMenu = IngameMenu;
+            baseMenu = ingameMenu;
         }
 
         if (AudioController.Instance != null)
@@ -54,28 +54,28 @@ public class MenuController : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().buildIndex == 0)
         {
-            if (MainMenu.activeSelf == true) return;
+            if (mainMenu.activeSelf == true) return;
             else CloseSelectedMenu();
         }
         else
         {
             if (Player.Instance == null) return;
 
-            if (IngameMenu.activeSelf == false)
+            if (ingameMenu.activeSelf == false)
             {
                 if (gameIsPaused == false)
                 {
                     Cursor.lockState = CursorLockMode.None;
                     Cursor.visible = true;
                     PauseGame();
-                    IngameMenu.SetActive(true);
+                    ingameMenu.SetActive(true);
 
                 }
                 else CloseSelectedMenu();
             }
             else
             {
-                IngameMenu.SetActive(false);
+                ingameMenu.SetActive(false);
                 EndPause();
             }
         }
@@ -90,15 +90,18 @@ public class MenuController : MonoBehaviour
             //Settings.SetActive(currentMenu == Settings);
             //Credits.SetActive(currentMenu == Credits);
 
-            MainMenu.SetActive(false);
-            IngameMenu.SetActive(false);
+            mainMenu.SetActive(false);
+            ingameMenu.SetActive(false);
 
             AudioController.Instance.PlaySoundOneshot((int)AudioController.Sounds.menuButton);
         }
     }
     public void StartGame()
     {
-        if(PlayerPrefs.GetInt("NewGame") == 0)
+        baseMenu.SetActive(false);
+        baseMenu = ingameMenu;
+
+        if (PlayerPrefs.GetInt("NewGame") == 0)
         {
             //PlayerPrefs.SetInt("NewGame", 1);
             //Set new game PlayerPrefs
@@ -111,7 +114,7 @@ public class MenuController : MonoBehaviour
     }
     public void ResumeGame()
     {
-        IngameMenu.SetActive(false);
+        ingameMenu.SetActive(false);
         EndPause();
     }
     public void NewGame()
@@ -124,6 +127,12 @@ public class MenuController : MonoBehaviour
     }
     public void BackToMainMenu()
     {
+        baseMenu.SetActive(false);
+        baseMenu = mainMenu;
+
+        baseMenu.SetActive(true);
+        GameManager.Instance.ActivateGameUI(false);
+
         AudioController.Instance.PlaySoundOneshot((int)AudioController.Sounds.menuButton);
 
         Time.timeScale = 1;
