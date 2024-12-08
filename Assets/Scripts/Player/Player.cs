@@ -1,9 +1,7 @@
 using Events;
 using Santa;
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.XR;
 
 [RequireComponent(typeof(PlayerController))]
 [RequireComponent(typeof(AudioSource))]
