@@ -40,7 +40,7 @@ public class Player : MonoBehaviour
             Destroy(Instance.gameObject);
         }
         Instance = this;
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
 
         controller = GetComponent<PlayerController>();
         audio = GetComponent<AudioSource>();

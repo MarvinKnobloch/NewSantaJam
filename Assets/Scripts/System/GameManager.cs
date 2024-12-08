@@ -47,7 +47,6 @@ namespace Santa
 
         private Savestate savestate;
         private CheckpointData checkpoint;
-        private bool awaitSceneLoading;
 
         void Awake()
         {
@@ -81,7 +80,6 @@ namespace Santa
                 Application.Quit();
                 return;
             }
-            awaitSceneLoading = true;
         }
 
         private void Start()
@@ -95,12 +93,11 @@ namespace Santa
         // Wird beim Start jeder neuen Szene aufgerufen
         public void LevelStartControllerAwake(LevelStartController levelStart)
         {
-            if (awaitSceneLoading) SceneLoaded(levelStart);
+            SceneLoaded(levelStart);
         }
 
         private void SceneLoaded(LevelStartController levelStart)
         {
-            awaitSceneLoading = false;
             //var currentScene = levelStart.GetScene();
 
             // Gibt es einen Checkpoint?
@@ -129,7 +126,6 @@ namespace Santa
             {
                 Instance.checkpoint.sceneIndex = Instance.savestate.sceneIndex;
             }
-            Instance.awaitSceneLoading = true;
 
             Destroy(Player.Instance.gameObject);
             SceneManager.LoadScene((int)Instance.checkpoint.sceneIndex);
@@ -164,7 +160,6 @@ namespace Santa
 
         public void LoadScene(SceneEnum scene)
         {
-            Instance.awaitSceneLoading = true;
 
             Destroy(Player.Instance.gameObject);
             SceneManager.LoadScene((int)scene);

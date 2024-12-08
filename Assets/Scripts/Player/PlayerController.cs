@@ -82,6 +82,7 @@ namespace Santa
 
             Mouse.current.WarpCursorPosition(new Vector2(Screen.width / 2, Screen.height / 2));
             cameraRotation.y = transform.rotation.eulerAngles.y;
+
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }

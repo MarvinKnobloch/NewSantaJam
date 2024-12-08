@@ -121,6 +121,7 @@ public class MenuController : MonoBehaviour
     {
         AudioController.Instance.PlaySoundOneshot((int)AudioController.Sounds.menuButton);
 
+        gameIsPaused = false;
         Time.timeScale = 1;
         PlayerPrefs.SetInt("NewGame", 0);
         StartGame();
@@ -133,8 +134,11 @@ public class MenuController : MonoBehaviour
         baseMenu.SetActive(true);
         GameManager.Instance.ActivateGameUI(false);
 
+        //GameManager.Instance.ResetProgress();
+
         AudioController.Instance.PlaySoundOneshot((int)AudioController.Sounds.menuButton);
 
+        gameIsPaused = false;
         Time.timeScale = 1;
         SceneManager.LoadScene(0);
     }
