@@ -49,7 +49,16 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if (transform.position.y < deathHeight) die();
+        if (transform.position.y < deathHeight)
+        {
+            die();
+            return;
+        }
+
+        if (Time.frameCount % 4 == 1)
+        {
+            ScanInteractables();
+        }
     }
 
     public bool IsRunning()
