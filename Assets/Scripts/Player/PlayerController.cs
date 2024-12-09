@@ -30,6 +30,7 @@ namespace Santa
         [Header("Dash")]
         public float dashStrength;
         public float dashLength;
+        [NonSerialized] public bool canDash;
 
         [Range(0f, 1f)] public float groundedDist = 0.03f;
         public LayerMask groundLayers = Physics.AllLayers;
@@ -236,13 +237,21 @@ namespace Santa
             var pressed = ctx.ReadValueAsButton();
             if (pressed)
             {
-                StartDash();
+                if (state == States.GroundState) return;
+
+                if (canDash)
+                {
+                    StartDash();
+                }
             }
         }
         private void OnUse(InputAction.CallbackContext ctx)
         {
             var pressed = ctx.ReadValueAsButton();
-            if (pressed) StartDash();
+            if (pressed)
+            {
+                onUse.Invoke();
+            }
         }
 
         public Vector3 Vec2D(Vector3 vec)
@@ -251,6 +260,7 @@ namespace Santa
         }
         public void SwitchToGroundState()
         {
+            canDash = true;
             canDoubleJump = true;
             IsGrounded = true;
             state = States.GroundState;
@@ -273,6 +283,7 @@ namespace Santa
             IsGrounded = false;
             velocity = Vector3.zero;
             dashTimer = 0;
+            canDash = false;
 
             state = States.DashState;
         }
