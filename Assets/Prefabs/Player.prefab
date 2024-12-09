@@ -273,7 +273,7 @@ MonoBehaviour:
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
-    FieldOfView: 45
+    FieldOfView: 70
     OrthographicSize: 10
     NearClipPlane: 0.1
     FarClipPlane: 5000
@@ -516,14 +516,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   runSpeed: 10
-  jumpStrength: 0.5
+  jumpStrength: 0.25
+  jumpMaxPressTime: 0.2
   offGroundJumpFrames: 4
   slopeLimit: 42
   playerCam: {fileID: 3043698463584396642}
   maxCameraAngle: 60
   minCameraAngle: -60
   useGravity: 1
-  gravityFactor: 0.3
+  gravityFactor: 0.15
   stickToGroundForce: 10
   skinWidth: 0.01
   stepHeight: 0.2
@@ -548,6 +549,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   deathFallHeight: 10
+  deathHeight: -24
   interactableChannel: {fileID: 11400000, guid: eae8505c31efbcd4b806cffc6808544f, type: 2}
 --- !u!82 &4664660022267772818
 AudioSource:
