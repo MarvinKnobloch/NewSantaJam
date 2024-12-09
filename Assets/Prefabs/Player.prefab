@@ -515,22 +515,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
-  jumpStrength: 0.45
+  jumpStrength: 0.25
   jumpMaxPressTime: 0.2
+  jumpStrengthDecay: 0.3
   offGroundJumpDelay: 0.05
   slopeLimit: 42
   playerCam: {fileID: 3043698463584396642}
   maxCameraAngle: 60
   minCameraAngle: -60
   useGravity: 1
-  gravityFactor: 0.24
-  stickToGroundForce: 10
+  gravityFactor: 0.15
+  stickToGroundForce: 2
   skinWidth: 0.01
   stepHeight: 0.2
   groundedDist: 0.03
   groundLayers:
     serializedVersion: 2
     m_Bits: 4294967295
+  performNormalJump: 0
+  canDoubleJump: 0
+  performDoubleJump: 0
   state: 0
 --- !u!114 &5224848918718561056
 MonoBehaviour:
@@ -549,7 +553,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   deathFallHeight: 10
-  deathHeight: -24
+  deathHeight: -30
   interactableChannel: {fileID: 11400000, guid: eae8505c31efbcd4b806cffc6808544f, type: 2}
 --- !u!82 &4664660022267772818
 AudioSource:

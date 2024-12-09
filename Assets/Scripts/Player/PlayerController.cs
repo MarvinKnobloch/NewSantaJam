@@ -12,6 +12,7 @@ namespace Santa
         public float moveSpeed;
         public float jumpStrength = 0.5f;
         public float jumpMaxPressTime;
+        public float jumpStrengthDecay = 0.1f;
         public float offGroundJumpDelay = 0.05f;
         [Range(0, 90)] public float slopeLimit = 42f;
 
@@ -49,11 +50,13 @@ namespace Santa
         [NonSerialized] public float speed;
         [NonSerialized] public Vector3 cameraRotation;
         [NonSerialized] public float fallStartHeight = float.MinValue;
-        [NonSerialized] public float jumpFrameTimer;
+        //[NonSerialized] public float jumpFrameTimer;
         [NonSerialized] public float maxFallSpeed = -2f;
         [NonSerialized] public float jumpPressTime;
-        private bool jump;
-        private bool doubleJump;
+        [NonSerialized] public float groundToAirTimer;
+        public bool performNormalJump;
+        public bool canDoubleJump;
+        public bool performDoubleJump;
 
         // Funktions Delegaten für den Spieler
         public System.Action onJump;
@@ -67,6 +70,7 @@ namespace Santa
         public enum States
         {
             GroundState,
+            GroundToAir,
             AirState,
             Dash,
             Empty,
@@ -111,6 +115,11 @@ namespace Santa
                 case States.GroundState:
                     playerMovement.RotatePlayer();
                     playerMovement.GroundMovement();        
+                    playerMovement.Movement();
+                    break;
+                case States.GroundToAir:
+                    playerMovement.RotatePlayer();
+                    playerMovement.GroundToAir();
                     playerMovement.Movement();
                     break;
                 case States.AirState:
@@ -181,14 +190,27 @@ namespace Santa
         private void OnJump(InputAction.CallbackContext ctx)
         {
             var pressed = ctx.ReadValueAsButton();
-            if (pressed && jumpFrameTimer > 0)
+            if (pressed)
             {
-                StartJump();
-            }
-            else if (doubleJump)
-            {
-                StartJump();
-                doubleJump = false;
+                switch (state)
+                {
+                    case States.GroundState:
+                        performNormalJump = true;
+                        StartJump();
+                        break;
+                    case States.GroundToAir:
+                        performNormalJump = true;
+                        StartJump();
+                        break;
+                    case States.AirState:
+                        if (canDoubleJump == false) return;
+                        if (performNormalJump) return;
+
+                        canDoubleJump = false;
+                        performDoubleJump = true;
+                        StartJump();
+                        break;
+                }
             }
         }
         private void StartJump()
@@ -196,10 +218,8 @@ namespace Santa
             onJump?.Invoke();
             velocity.y = jumpStrength;
             SwitchToAirState();
-            jumpFrameTimer = -1;
             jumpPressTime = 0;
         }
-
         private void OnUse(InputAction.CallbackContext ctx)
         {
             var pressed = ctx.ReadValueAsButton();
@@ -215,8 +235,15 @@ namespace Santa
         }
         public void SwitchToGroundState()
         {
+            canDoubleJump = true;
             IsGrounded = true;
             state = States.GroundState;
+        }
+        public void SwitchGroundToAir()
+        {
+            groundToAirTimer = 0;
+            IsGrounded = false;
+            state = States.GroundToAir;
         }
         public void SwitchToAirState()
         {

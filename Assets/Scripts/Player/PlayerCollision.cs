@@ -14,8 +14,6 @@ public class PlayerCollision
         player.rig.position += Vector3.up * player.stepHeight;
         var movement = CollideAndSlide(player.rig.position, velHorizontal, velHorizontal.normalized, false, 0);
 
-        player.SwitchToGroundState();
-
         movement += CollideAndSlide(player.rig.position + movement, velVertical, Vector3.zero, true, 0);
         return movement;
     }
@@ -27,11 +25,18 @@ public class PlayerCollision
         float dist = vel.magnitude + player.skinWidth;
 
         RaycastHit hit;
+        RaycastHit groundCheck;
 
         float radius = player.playerCollider.radius - player.skinWidth;
         float height = player.playerCollider.height / 2f - player.playerCollider.radius;
         Vector3 p1 = pos + player.playerCollider.center - Vector3.up * height;
         Vector3 p2 = pos + player.playerCollider.center + Vector3.up * height;
+
+        if (Physics.CapsuleCast(p1, p2, radius * 0.5f, vel.normalized, out groundCheck, dist, player.groundLayers, QueryTriggerInteraction.Ignore))
+        {
+            player.SwitchToGroundState();
+        }
+
         if (Physics.CapsuleCast(p1, p2, radius, vel.normalized, out hit, dist, player.groundLayers, QueryTriggerInteraction.Ignore))
         {
             Vector3 snapToSurface = vel.normalized * (hit.distance - player.skinWidth);
@@ -84,7 +89,7 @@ public class PlayerCollision
         }
         else if (gravityPass)
         {
-            player.SwitchToAirState();
+            if(player.state == PlayerController.States.GroundState) player.SwitchGroundToAir();
         }
 
         return vel;

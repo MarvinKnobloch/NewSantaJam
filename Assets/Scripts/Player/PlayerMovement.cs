@@ -45,30 +45,60 @@ public class PlayerMovement
     public void GroundMovement()
     {
         player.velocity.y = -player.stickToGroundForce;
-        player.jumpFrameTimer = player.offGroundJumpDelay;
+    }
+    public void GroundToAir()
+    {
+        player.groundToAirTimer += Time.fixedDeltaTime;
+
+        PlayerFall();
+
+        if(player.groundToAirTimer > player.offGroundJumpDelay)
+        {
+            player.SwitchToAirState();
+        }
     }
     public void AirMovement()
     {
-        player.jumpFrameTimer -= Time.deltaTime;
-
-        if (player.controls.Player.Jump.IsPressed() && player.jumpPressTime < player.jumpMaxPressTime)
-        {
-            player.velocity.y = player.jumpStrength;
-            player.jumpPressTime += Time.fixedDeltaTime;
-
-        }
+        if (player.performNormalJump) Jump();
+        else if (player.performDoubleJump) Jump();
         else
         {
-            if (player.velocity.y > player.maxFallSpeed)
-            {
-                player.velocity.y += Physics.gravity.y * Time.fixedDeltaTime * player.gravityFactor;
-            }
-            else player.velocity.y = player.maxFallSpeed;
+            PlayerFall();
         }
 
         if (player.fallStartHeight == float.MinValue && player.velocity.y < 0)
         {
             player.fallStartHeight = player.transform.position.y;
         }
+    }
+    private void Jump()
+    {
+        if (player.controls.Player.Jump.IsPressed())
+        {
+            if (player.jumpPressTime < player.jumpMaxPressTime)
+            {
+                player.velocity.y = player.jumpStrength - (player.jumpPressTime * player.jumpStrengthDecay);
+                player.jumpPressTime += Time.fixedDeltaTime;
+            }
+            else JumpReset();
+        }
+        else
+        {
+            PlayerFall();
+            JumpReset();
+        }
+    }
+    private void PlayerFall()
+    {
+        if (player.velocity.y > player.maxFallSpeed)
+        {
+            player.velocity.y += Physics.gravity.y * Time.fixedDeltaTime * player.gravityFactor;
+        }
+        else player.velocity.y = player.maxFallSpeed;
+    }
+    private void JumpReset()
+    {
+        if (player.performNormalJump) player.performNormalJump = false;
+        else if (player.canDoubleJump == false) player.performDoubleJump = false;
     }
 }
