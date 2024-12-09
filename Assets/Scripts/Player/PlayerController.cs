@@ -27,6 +27,10 @@ namespace Santa
         public float skinWidth = 0.01f;
         public float stepHeight = 0.2f;
 
+        [Header("Dash")]
+        public float dashStrength;
+        public float dashLength;
+
         [Range(0f, 1f)] public float groundedDist = 0.03f;
         public LayerMask groundLayers = Physics.AllLayers;
 
@@ -58,6 +62,8 @@ namespace Santa
         public bool canDoubleJump;
         public bool performDoubleJump;
 
+        [NonSerialized] public float dashTimer;
+
         // Funktions Delegaten für den Spieler
         public System.Action onJump;
         public System.Action onUse;
@@ -72,7 +78,7 @@ namespace Santa
             GroundState,
             GroundToAir,
             AirState,
-            Dash,
+            DashState,
             Empty,
         }
         void Awake()
@@ -127,6 +133,9 @@ namespace Santa
                     playerMovement.AirMovement();
                     playerMovement.Movement();
                     break;
+                case States.DashState:
+                    playerMovement.Dash();
+                    break;
             }
         }
 
@@ -137,12 +146,14 @@ namespace Santa
                 controls.Player.Movement.performed += ReadMovement;
                 controls.Player.Rotate.performed += ReadRotation;
                 controls.Player.Jump.performed += OnJump;
+                controls.Player.Dash.performed += OnDash;
             }
             else
             {
                 controls.Player.Movement.performed -= ReadMovement;
                 controls.Player.Rotate.performed -= ReadRotation;
                 controls.Player.Jump.performed -= OnJump;
+                controls.Player.Dash.performed -= OnDash;
             }
         }
 
@@ -220,13 +231,18 @@ namespace Santa
             SwitchToAirState();
             jumpPressTime = 0;
         }
-        private void OnUse(InputAction.CallbackContext ctx)
+        private void OnDash(InputAction.CallbackContext ctx)
         {
             var pressed = ctx.ReadValueAsButton();
             if (pressed)
             {
-                onUse.Invoke();
+                StartDash();
             }
+        }
+        private void OnUse(InputAction.CallbackContext ctx)
+        {
+            var pressed = ctx.ReadValueAsButton();
+            if (pressed) StartDash();
         }
 
         public Vector3 Vec2D(Vector3 vec)
@@ -249,6 +265,16 @@ namespace Santa
         {
             IsGrounded = false;
             state = States.AirState;
+        }
+        public void StartDash()
+        {
+            performNormalJump = false;
+            if (performDoubleJump) performDoubleJump = false;
+            IsGrounded = false;
+            velocity = Vector3.zero;
+            dashTimer = 0;
+
+            state = States.DashState;
         }
     }
 }

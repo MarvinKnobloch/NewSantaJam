@@ -101,4 +101,30 @@ public class PlayerMovement
         if (player.performNormalJump) player.performNormalJump = false;
         else if (player.canDoubleJump == false) player.performDoubleJump = false;
     }
+    public void Dash()
+    {
+        //player.velocity = player.transform.forward;
+        player.rig.MovePosition(player.rig.position + player.transform.forward * player.dashStrength);
+
+        player.dashTimer += Time.deltaTime;
+        if(player.dashTimer > player.dashLength)
+        {
+            RaycastHit groundCheck;
+            Vector3 pos = player.rig.position;
+
+            float radius = player.playerCollider.radius - player.skinWidth;
+            float height = player.playerCollider.height / 2f - player.playerCollider.radius;
+            Vector3 p1 = pos + player.playerCollider.center - Vector3.up * height;
+            Vector3 p2 = pos + player.playerCollider.center + Vector3.up * height;
+
+            if (Physics.CapsuleCast(p1, p2, radius * 0.5f, Vector3.down, out groundCheck, 1, player.groundLayers, QueryTriggerInteraction.Ignore))
+            {
+                player.SwitchToGroundState();
+            }
+            else
+            {
+                player.SwitchToAirState();
+            }
+        }
+    }
 }

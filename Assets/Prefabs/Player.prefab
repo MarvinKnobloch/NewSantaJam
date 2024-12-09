@@ -528,6 +528,8 @@ MonoBehaviour:
   stickToGroundForce: 2
   skinWidth: 0.01
   stepHeight: 0.2
+  dashStrength: 1
+  dashLength: 0.2
   groundedDist: 0.03
   groundLayers:
     serializedVersion: 2
