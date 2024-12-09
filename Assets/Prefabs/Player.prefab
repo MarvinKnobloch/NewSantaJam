@@ -516,7 +516,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   runSpeed: 10
-  jumpStrength: 0.25
+  jumpStrength: 0.45
   jumpMaxPressTime: 0.2
   offGroundJumpFrames: 4
   slopeLimit: 42
@@ -524,7 +524,7 @@ MonoBehaviour:
   maxCameraAngle: 60
   minCameraAngle: -60
   useGravity: 1
-  gravityFactor: 0.15
+  gravityFactor: 0.24
   stickToGroundForce: 10
   skinWidth: 0.01
   stepHeight: 0.2
