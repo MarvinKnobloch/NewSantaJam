@@ -53,9 +53,6 @@ namespace Santa
         // Funktions Delegaten für den Spieler
         public System.Action onJump;
         public System.Action onUse;
-        public System.Action onCast;
-        public System.Action onCancel;
-        public System.Action onLight;
         public System.Action<float> onLanding;
 
         void Awake()
@@ -322,33 +319,6 @@ namespace Santa
             if (pressed)
             {
                 onUse.Invoke();
-            }
-        }
-
-        private void OnCast(InputAction.CallbackContext ctx)
-        {
-            var pressed = ctx.ReadValueAsButton();
-            if (pressed)
-            {
-                onCast?.Invoke();
-            }
-        }
-
-        private void OnCancel(InputAction.CallbackContext ctx)
-        {
-            var pressed = ctx.ReadValueAsButton();
-            if (pressed)
-            {
-                onCancel?.Invoke();
-            }
-        }
-
-        private void OnLight(InputAction.CallbackContext ctx)
-        {
-            var pressed = ctx.ReadValueAsButton();
-            if (pressed)
-            {
-                onLight?.Invoke();
             }
         }
 
