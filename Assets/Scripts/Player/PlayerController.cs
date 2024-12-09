@@ -11,6 +11,7 @@ namespace Santa
         public float moveSpeed;
         public float runSpeed;
         public float jumpStrength = 0.5f;
+        public float jumpMaxPressTime;
         public int offGroundJumpFrames = 4;
         [Range(0, 90)] public float slopeLimit = 42f;
 
@@ -21,7 +22,7 @@ namespace Santa
         [Header("Physik")]
         public bool useGravity = true;
         public float gravityFactor = 0.3f;
-        public float stickToGroundForce = 10f;
+        public float stickToGroundForce = 2f;
         public float skinWidth = 0.01f;
         public float stepHeight = 0.2f;
 
@@ -49,6 +50,8 @@ namespace Santa
         [System.NonSerialized] public Vector3 cameraRotation;
         private float fallStartHeight = float.MinValue;
         private int jumpFrameTimer;
+        private float maxFallSpeed = -2f;
+        private float jumpPressTime;
 
         // Funktions Delegaten für den Spieler
         public System.Action onJump;
@@ -150,14 +153,20 @@ namespace Santa
             if (!IsGrounded)
             {
                 if (jumpFrameTimer >= 0) jumpFrameTimer -= 1;
-                if (controls.Player.Jump.IsPressed() || jumpFrameTimer > 0)
+                if (controls.Player.Jump.IsPressed() && jumpPressTime < jumpMaxPressTime || jumpFrameTimer > 0 && jumpPressTime < jumpMaxPressTime)
                 {
-                    velocity.y += Physics.gravity.y * Time.fixedDeltaTime * gravityFactor * 0.5f;
+                    velocity.y = jumpStrength;
+                    jumpPressTime += Time.fixedDeltaTime;
                 }
                 else
                 {
-                    velocity.y += Physics.gravity.y * Time.fixedDeltaTime * gravityFactor;
+                    if (velocity.y > maxFallSpeed)
+                    {
+                        velocity.y += Physics.gravity.y * Time.fixedDeltaTime * gravityFactor;
+                    }
+                    else velocity.y = maxFallSpeed;
                 }
+
                 if (fallStartHeight == float.MinValue && velocity.y < 0)
                 {
                     fallStartHeight = transform.position.y;
@@ -313,6 +322,7 @@ namespace Santa
                 velocity.y = jumpStrength;
                 IsGrounded = false;
                 jumpFrameTimer = -1;
+                jumpPressTime = 0;
             }
         }
 
