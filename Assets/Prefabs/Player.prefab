@@ -514,11 +514,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d85c0055e06fbfd4eb7284c5e5750e5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
-  runSpeed: 10
+  moveSpeed: 10
   jumpStrength: 0.45
   jumpMaxPressTime: 0.2
-  offGroundJumpFrames: 4
+  offGroundJumpDelay: 0.05
   slopeLimit: 42
   playerCam: {fileID: 3043698463584396642}
   maxCameraAngle: 60
@@ -532,6 +531,7 @@ MonoBehaviour:
   groundLayers:
     serializedVersion: 2
     m_Bits: 4294967295
+  state: 0
 --- !u!114 &5224848918718561056
 MonoBehaviour:
   m_ObjectHideFlags: 0

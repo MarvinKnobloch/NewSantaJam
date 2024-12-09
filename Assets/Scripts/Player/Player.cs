@@ -61,11 +61,6 @@ public class Player : MonoBehaviour
         }
     }
 
-    public bool IsRunning()
-    {
-        return controller.IsRunning();
-    }
-
     private void ScanInteractables()
     {
         RaycastHit hit;
