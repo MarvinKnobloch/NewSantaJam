@@ -852,6 +852,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1440838037638952638, guid: 6ee644d06641a78478189cdcf3a8ba5f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -3.2
+      objectReference: {fileID: 0}
     - target: {fileID: 1780624607276313610, guid: 6ee644d06641a78478189cdcf3a8ba5f, type: 3}
       propertyPath: m_Name
       value: Polarlichter
