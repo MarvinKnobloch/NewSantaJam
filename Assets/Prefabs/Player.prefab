@@ -521,14 +521,14 @@ MonoBehaviour:
   offGroundJumpDelay: 0.05
   slopeLimit: 42
   playerCam: {fileID: 3043698463584396642}
-  maxCameraAngle: 60
+  maxCameraAngle: 50
   minCameraAngle: -60
   useGravity: 1
   gravityFactor: 0.15
   stickToGroundForce: 2
   skinWidth: 0.01
   stepHeight: 0.2
-  dashStrength: 1
+  dashStrength: 0.8
   dashLength: 0.2
   groundedDist: 0.03
   groundLayers:
