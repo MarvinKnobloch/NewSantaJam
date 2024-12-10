@@ -103,8 +103,19 @@ public class PlayerMovement
     }
     public void Dash()
     {
-        //player.velocity = player.transform.forward;
-        player.rig.MovePosition(player.rig.position + player.transform.forward * player.dashStrength);
+        var currentVelocity = player.velocity;
+        Vector3 applied;
+
+        applied = player.transform.forward * player.dashStrength * Time.fixedDeltaTime;
+
+
+        player.velocity = Vector3.Lerp(currentVelocity, applied, Time.fixedDeltaTime * 15f);
+        player.velocity.y = 0;
+
+        Vector3 movement = player.playerCollision.CollideAndSlide();
+        player.speed = new Vector2(movement.x, movement.z).magnitude;
+
+        player.rig.MovePosition(player.rig.position + movement);
 
         player.dashTimer += Time.deltaTime;
         if(player.dashTimer > player.dashLength)

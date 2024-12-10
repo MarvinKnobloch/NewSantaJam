@@ -4,6 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 namespace Santa
 {
@@ -19,6 +20,7 @@ namespace Santa
 
         [Header("UI")]
         [SerializeField] private GameObject gameUI;
+        public TextMeshProUGUI interactionText;
 
         [Header("Events")]
         [SerializeField] private BoolEventChannelSO gameUIChannel;

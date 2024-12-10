@@ -34,7 +34,10 @@ public class PlayerCollision
 
         if (Physics.CapsuleCast(p1, p2, radius * 0.5f, vel.normalized, out groundCheck, dist, player.groundLayers, QueryTriggerInteraction.Ignore))
         {
-            player.SwitchToGroundState();
+            if (player.state != PlayerController.States.DashState)
+            {
+                player.SwitchToGroundState();
+            }
         }
 
         if (Physics.CapsuleCast(p1, p2, radius, vel.normalized, out hit, dist, player.groundLayers, QueryTriggerInteraction.Ignore))

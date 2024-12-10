@@ -528,7 +528,7 @@ MonoBehaviour:
   stickToGroundForce: 2
   skinWidth: 0.01
   stepHeight: 0.2
-  dashStrength: 0.8
+  dashStrength: 25
   dashLength: 0.2
   groundedDist: 0.03
   groundLayers:
@@ -553,7 +553,7 @@ MonoBehaviour:
   useDist: 2
   useMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 4096
   deathFallHeight: 10
   deathHeight: -30
   interactableChannel: {fileID: 11400000, guid: eae8505c31efbcd4b806cffc6808544f, type: 2}

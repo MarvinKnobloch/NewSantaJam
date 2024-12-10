@@ -11,6 +11,7 @@ namespace Santa
         public static int Dimension_2 = 8;
         public static int Trigger = 9;
         public static int Spieler = 10;
+        public static int InteractAble = 12;
 
         // Gibt eine Maske zurück, die alle übergebenen Layer enthält
         public static int Mask(params int[] layers)
@@ -21,6 +22,19 @@ namespace Santa
                 mask |= 1 << layer;
             }
             return mask;
+        }
+
+        public static bool CheckLayer(LayerMask objLayer, LayerMask layerToCheck)
+        {
+            if (((1 << objLayer) & layerToCheck) != 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
         }
     }
 }
