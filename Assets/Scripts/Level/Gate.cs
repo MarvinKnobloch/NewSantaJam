@@ -12,8 +12,8 @@ public class Gate : MonoBehaviour, IActivate
     [SerializeField] private float doorOpenDuration = 1.0f;
     private float timer;
 
-
-    private bool secretUnlocked;
+    [SerializeField] private bool fastBack;
+    [SerializeField] private float backDuration;
 
     private void Awake()
     {
@@ -29,12 +29,7 @@ public class Gate : MonoBehaviour, IActivate
             if (timer != 0) timer = doorOpenDuration - timer;
 
             StopAllCoroutines();
-            StartCoroutine(MoveGate(startPosi, endPosi));
-
-            if (secretUnlocked == false)
-            {
-                secretUnlocked = true;
-            }
+            StartCoroutine(MoveGate(startPosi, endPosi, doorOpenDuration));
         }
     }
 
@@ -45,20 +40,32 @@ public class Gate : MonoBehaviour, IActivate
         {
             if (timer != 0) timer = doorOpenDuration - timer;
 
+            float duration = doorOpenDuration;
+            if (fastBack)
+            {
+                duration = backDuration;
+                timer *= backDuration / doorOpenDuration; 
+            }
+
             StopAllCoroutines();
-            StartCoroutine(MoveGate(endPosi, startPosi));
+            StartCoroutine(MoveGate(endPosi, startPosi, duration));
         }
     }
-    private IEnumerator MoveGate(Vector3 start, Vector3 end)
+    private IEnumerator MoveGate(Vector3 start, Vector3 end, float duration)
     {
         while (Vector3.Distance(transform.position, end) > 0.1f)
         {
-            float time = timer / doorOpenDuration;
+            float time = timer / duration;
             transform.position = Vector3.Lerp(start, end, time);
             timer += Time.deltaTime;
             yield return null;
         }
         timer = 0;
         StopAllCoroutines();
+    }
+
+    public void SetRequirement()
+    {
+        requiredGoals++;
     }
 }
