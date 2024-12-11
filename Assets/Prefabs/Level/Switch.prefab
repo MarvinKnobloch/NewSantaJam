@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7892510378461914734}
   - component: {fileID: 3770623084203488521}
   - component: {fileID: 8691992365060611436}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -178,3 +178,5 @@ MonoBehaviour:
   activ: 0
   objsToActivate:
   - {fileID: 0}
+  connectedSwitches: []
+  toggle: 0

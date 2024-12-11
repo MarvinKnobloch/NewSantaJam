@@ -16,7 +16,7 @@ TagManager:
   - Dimension 2
   - Trigger
   - Player
-  - Moveables
+  - CamIgnore
   - Interactable
   - 
   - 

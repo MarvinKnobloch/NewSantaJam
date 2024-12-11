@@ -9,11 +9,13 @@ namespace Santa
         public float springForce = 100f;
         public float hysterese = 0.25f;
 
+        [SerializeField] private LayerMask hitLayer;
+
         private float distance;
 
         void LateUpdate()
         {
-            if (Physics.Raycast(transform.parent.position, -transform.forward, out RaycastHit hit, targetDistance))
+            if (Physics.Raycast(transform.parent.position, -transform.forward, out RaycastHit hit, targetDistance, hitLayer))
             {
                 if (hit.distance + hysterese < distance)
                 {

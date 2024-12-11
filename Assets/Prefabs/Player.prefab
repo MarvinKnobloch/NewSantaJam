@@ -264,6 +264,9 @@ MonoBehaviour:
   wallOffset: 0.5
   springForce: 50
   hysterese: 0.1
+  hitLayer:
+    serializedVersion: 2
+    m_Bits: 1
 --- !u!1 &3043698463584396642
 GameObject:
   m_ObjectHideFlags: 0
