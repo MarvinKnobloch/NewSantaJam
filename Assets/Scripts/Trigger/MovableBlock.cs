@@ -11,6 +11,8 @@ namespace Santa
         [Tooltip("Das Objekt lässt sich nur entlang einer Achse schieben")]
         public bool singleAxis = true;
 
+        [SerializeField] private LayerMask boxCastLayer;
+
         private Vector3 movement;
 
         void FixedUpdate()
@@ -21,7 +23,7 @@ namespace Santa
                 var newPos = pos + movement * Time.fixedDeltaTime;
 
                 var collider = GetComponent<BoxCollider>();
-                if (Physics.BoxCast(pos + collider.center, collider.bounds.extents * 0.99f, movement, Quaternion.identity, Vector3.Magnitude(movement * Time.fixedDeltaTime)))
+                if (Physics.BoxCast(pos + collider.center, collider.bounds.extents * 0.99f, movement, Quaternion.identity, Vector3.Magnitude(movement * Time.fixedDeltaTime), boxCastLayer, QueryTriggerInteraction.Ignore))
                 {
                     movement = Vector3.zero;
                     return;
