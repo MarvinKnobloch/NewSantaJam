@@ -8,6 +8,8 @@ namespace Santa
     {
         public float moveSpeed = 4.0f;
         public float friction = 0.5f;
+        [Tooltip("Das Objekt lässt sich nur entlang einer Achse schieben")]
+        public bool singleAxis = true;
 
         private Vector3 movement;
 
@@ -46,15 +48,24 @@ namespace Santa
                 var pos = transform.position;
                 var userPos = user.transform.position;
 
-                var dx = userPos.x - pos.x;
-                var dz = userPos.z - pos.z;
-                if (Mathf.Abs(dx) > Mathf.Abs(dz))
+                if (singleAxis)
                 {
-                    movement = new Vector3(-Mathf.Sign(dx) * moveSpeed, 0, 0);
+                    var dx = userPos.x - pos.x;
+                    var dz = userPos.z - pos.z;
+                    if (Mathf.Abs(dx) > Mathf.Abs(dz))
+                    {
+                        movement = new Vector3(-Mathf.Sign(dx) * moveSpeed, 0, 0);
+                    }
+                    else
+                    {
+                        movement = new Vector3(0, 0, -Mathf.Sign(dz) * moveSpeed);
+                    }
                 }
                 else
                 {
-                    movement = new Vector3(0, 0, -Mathf.Sign(dz) * moveSpeed);
+                    var delta = pos - userPos;
+                    delta.y = 0;
+                    movement = Vector3.Normalize(delta) * moveSpeed;
                 }
             }
         }

@@ -72,6 +72,11 @@ public class PlayerCollision
                 // Wand
                 if (player.IsGrounded && !gravityPass)
                 {
+                    if (hit.collider.gameObject.TryGetComponent(out ITrigger other))
+                    {
+                        other.Trigger(player, TriggerCommand.Toggle);
+                    }
+
                     var wallNormal = player.Vec2D(hit.normal).normalized;
                     float scale = 1 - Vector3.Dot(wallNormal, -origDir);
                     leftOver = Vector3.ProjectOnPlane(player.Vec2D(leftOver), wallNormal) * scale;
