@@ -6,8 +6,9 @@ public class Switch : MonoBehaviour, IInteractable, ITrigger
 {
     public bool activ = false;
     [SerializeField] private GameObject[] objsToActivate;
+    [SerializeField] private Switch[] connectedSwitches;
 
-    private bool toggle;
+    [SerializeField] private bool toggle;
 
     private void Start()
     {
@@ -40,7 +41,16 @@ public class Switch : MonoBehaviour, IInteractable, ITrigger
     {
         switch (cmd)
         {
-            case TriggerCommand.Toggle: { toggle = !toggle; break; }
+            case TriggerCommand.Toggle: 
+                { 
+                    toggle = !toggle;
+                    foreach (Switch obj in connectedSwitches)
+                    {
+                        Debug.Log("toggle");
+                        obj.toggle = toggle;
+                    }
+                    break;
+                }
             case TriggerCommand.ForceOn: toggle = true; break;
             case TriggerCommand.ForceOff: toggle = false; break;
         }
