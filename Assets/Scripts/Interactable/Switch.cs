@@ -46,7 +46,6 @@ public class Switch : MonoBehaviour, IInteractable, ITrigger
                     toggle = !toggle;
                     foreach (Switch obj in connectedSwitches)
                     {
-                        Debug.Log("toggle");
                         obj.toggle = toggle;
                     }
                     break;
@@ -58,14 +57,20 @@ public class Switch : MonoBehaviour, IInteractable, ITrigger
         {
             foreach (GameObject obj in objsToActivate)
             {
-                obj.GetComponent<IActivate>().Activate();
+                if (obj.TryGetComponent(out IActivate activate))
+                {
+                    activate.Activate();
+                }
             }
         }
         else
         {
             foreach (GameObject obj in objsToActivate)
             {
-                obj.GetComponent<IActivate>().Deactivate();
+                if (obj.TryGetComponent(out IActivate activate))
+                {
+                    activate.Deactivate();
+                }
             }
         }
     }
