@@ -73,6 +73,10 @@ namespace Santa
         private PlayerMovement playerMovement = new PlayerMovement();
         [NonSerialized] public PlayerCollision playerCollision = new PlayerCollision();
 
+        //Abilities
+        [NonSerialized] public bool doubleJumpUnlocked;
+        [NonSerialized] public bool dashUnlocked;
+
         public States state;
         public enum States
         {
@@ -148,6 +152,7 @@ namespace Santa
                 controls.Player.Rotate.performed += ReadRotation;
                 controls.Player.Jump.performed += OnJump;
                 controls.Player.Dash.performed += OnDash;
+                controls.Menu.CheatMode.performed += OnCheat;
             }
             else
             {
@@ -155,6 +160,7 @@ namespace Santa
                 controls.Player.Rotate.performed -= ReadRotation;
                 controls.Player.Jump.performed -= OnJump;
                 controls.Player.Dash.performed -= OnDash;
+                controls.Menu.CheatMode.performed -= OnCheat;
             }
         }
 
@@ -215,6 +221,8 @@ namespace Santa
                         StartJump();
                         break;
                     case States.AirState:
+                        if (doubleJumpUnlocked == false) return;
+
                         if (canDoubleJump == false) return;
                         if (performNormalJump) return;
 
@@ -234,6 +242,8 @@ namespace Santa
         }
         private void OnDash(InputAction.CallbackContext ctx)
         {
+            if (dashUnlocked == false) return;
+
             var pressed = ctx.ReadValueAsButton();
             if (pressed)
             {
@@ -286,6 +296,15 @@ namespace Santa
             canDash = false;
 
             state = States.DashState;
+        }
+        private void OnCheat(InputAction.CallbackContext ctx)
+        {
+            var pressed = ctx.ReadValueAsButton();
+            if (pressed)
+            {
+                dashUnlocked = !dashUnlocked;
+                doubleJumpUnlocked = !doubleJumpUnlocked;
+            }
         }
     }
 }

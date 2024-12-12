@@ -249,6 +249,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "CheatMode",
+                    "type": "Button",
+                    "id": "cb4934bd-0e6d-455e-b2fc-ced4beea91c6",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -260,6 +269,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "MenuEsc",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "45b263e6-e63a-4357-8c92-1a6d36422c34",
+                    "path": "<Keyboard>/f4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CheatMode",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

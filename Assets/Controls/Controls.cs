@@ -271,6 +271,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CheatMode"",
+                    ""type"": ""Button"",
+                    ""id"": ""cb4934bd-0e6d-455e-b2fc-ced4beea91c6"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -282,6 +291,17 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""MenuEsc"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""45b263e6-e63a-4357-8c92-1a6d36422c34"",
+                    ""path"": ""<Keyboard>/f4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CheatMode"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -302,6 +322,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         m_Menu_MenuEsc = m_Menu.FindAction("MenuEsc", throwIfNotFound: true);
+        m_Menu_CheatMode = m_Menu.FindAction("CheatMode", throwIfNotFound: true);
     }
 
     ~@Controls()
@@ -464,11 +485,13 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Menu;
     private List<IMenuActions> m_MenuActionsCallbackInterfaces = new List<IMenuActions>();
     private readonly InputAction m_Menu_MenuEsc;
+    private readonly InputAction m_Menu_CheatMode;
     public struct MenuActions
     {
         private @Controls m_Wrapper;
         public MenuActions(@Controls wrapper) { m_Wrapper = wrapper; }
         public InputAction @MenuEsc => m_Wrapper.m_Menu_MenuEsc;
+        public InputAction @CheatMode => m_Wrapper.m_Menu_CheatMode;
         public InputActionMap Get() { return m_Wrapper.m_Menu; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -481,6 +504,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @MenuEsc.started += instance.OnMenuEsc;
             @MenuEsc.performed += instance.OnMenuEsc;
             @MenuEsc.canceled += instance.OnMenuEsc;
+            @CheatMode.started += instance.OnCheatMode;
+            @CheatMode.performed += instance.OnCheatMode;
+            @CheatMode.canceled += instance.OnCheatMode;
         }
 
         private void UnregisterCallbacks(IMenuActions instance)
@@ -488,6 +514,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @MenuEsc.started -= instance.OnMenuEsc;
             @MenuEsc.performed -= instance.OnMenuEsc;
             @MenuEsc.canceled -= instance.OnMenuEsc;
+            @CheatMode.started -= instance.OnCheatMode;
+            @CheatMode.performed -= instance.OnCheatMode;
+            @CheatMode.canceled -= instance.OnCheatMode;
         }
 
         public void RemoveCallbacks(IMenuActions instance)
@@ -518,5 +547,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     public interface IMenuActions
     {
         void OnMenuEsc(InputAction.CallbackContext context);
+        void OnCheatMode(InputAction.CallbackContext context);
     }
 }
