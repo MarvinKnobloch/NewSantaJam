@@ -14,6 +14,8 @@ namespace Santa
         private static GameSettings settings;
         public static bool testMode = false;
 
+        [System.NonSerialized] public bool spawnAtEnd = false;
+
         [SerializeField] private AudioMixer audioMixer;
 
         private new Camera camera;
