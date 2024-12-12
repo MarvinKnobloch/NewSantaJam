@@ -124,6 +124,8 @@ public class MenuController : MonoBehaviour
 
         gameIsPaused = false;
         Time.timeScale = 1;
+        PlayerPrefs.SetInt("DoubleJumpUnlock", 0);
+        PlayerPrefs.SetInt("DashUnlock", 0);
         PlayerPrefs.SetInt("NewGame", 0);
         StartGame();
     }

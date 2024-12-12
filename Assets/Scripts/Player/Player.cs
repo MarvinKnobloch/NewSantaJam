@@ -151,13 +151,17 @@ public class Player : MonoBehaviour
     {
         if (Layers.CheckLayer(other.gameObject.layer, useMask))
         {
-            if (other.gameObject.TryGetComponent(out IInteractable interactable))
+            RemoveInteractionObj(other.gameObject);
+        }
+    }
+    public void RemoveInteractionObj(GameObject other)
+    {
+        if (other.gameObject.TryGetComponent(out IInteractable interactable))
+        {
+            if (interactionObjs.Contains(interactable))
             {
-                if (interactionObjs.Contains(interactable))
-                {
-                    interactionObjs.Remove(interactable);
-                    ScanInteractables();
-                }
+                interactionObjs.Remove(interactable);
+                ScanInteractables();
             }
         }
     }
