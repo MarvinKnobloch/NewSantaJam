@@ -62,8 +62,11 @@ namespace Santa
         public bool performNormalJump;
         public bool canDoubleJump;
         public bool performDoubleJump;
-
         [NonSerialized] public float dashTimer;
+
+        //Platform
+        public bool isOnPlatform;
+        [NonSerialized] public Platform movingPlatform;
 
         // Funktions Delegaten für den Spieler
         public System.Action onJump;

@@ -8,13 +8,21 @@ public class PlayerMovement
     public void Movement()
     {
         var currentVelocity = player.velocity;
+        if (player.isOnPlatform)
+        {
+            currentVelocity = player.velocity + player.movingPlatform.velocity * 0.0085f;
+        }
+
         Vector3 applied;
-
         applied = player.transform.rotation * player.moveVector * Time.fixedDeltaTime * player.moveSpeed;
-
 
         player.velocity = Vector3.Lerp(currentVelocity, applied, Time.fixedDeltaTime * 15f);
         player.velocity.y = currentVelocity.y;
+
+        //if (player.isOnPlatform)
+        //{
+        //    player.velocity += player.movingPlatform.velocity;
+        //}
 
         var wasGrounded = player.IsGrounded;
 

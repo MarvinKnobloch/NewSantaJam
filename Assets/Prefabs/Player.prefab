@@ -405,7 +405,7 @@ GameObject:
   - component: {fileID: 4664660022267772818}
   m_Layer: 10
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -512,6 +512,7 @@ MonoBehaviour:
   performNormalJump: 0
   canDoubleJump: 0
   performDoubleJump: 0
+  isOnPlatform: 0
   state: 0
 --- !u!114 &5224848918718561056
 MonoBehaviour:

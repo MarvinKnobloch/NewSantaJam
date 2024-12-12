@@ -1,4 +1,5 @@
 using UnityEngine;
+using Santa;
 
 public class Platform : MonoBehaviour
 {
@@ -6,6 +7,10 @@ public class Platform : MonoBehaviour
     private Vector3 startPosi;
     [SerializeField] private float travelTime;
     private float timer;
+    private BoxCollider boxCollider;
+
+    [System.NonSerialized] public Vector3 velocity;
+    private Vector3 oldPosi;
 
     public State state;
     public enum State
@@ -18,6 +23,10 @@ public class Platform : MonoBehaviour
         startPosi = transform.position;
         endPosi = transform.GetChild(1).transform.position;
         timer = 0;
+
+        boxCollider = GetComponent<BoxCollider>();
+        boxCollider.size = transform.GetChild(0).localScale;
+
     }
     private void FixedUpdate()
     {
@@ -30,6 +39,8 @@ public class Platform : MonoBehaviour
                 Move(endPosi, startPosi, State.moveToEnd);
                 break;
         }
+        velocity = (transform.position - oldPosi) / Time.fixedDeltaTime;
+        oldPosi = transform.position;
     }
     private void Move(Vector3 start, Vector3 end, State nextState)
     {
@@ -43,6 +54,35 @@ public class Platform : MonoBehaviour
         {
             timer = 0;
             state = nextState;
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            if (other.gameObject.TryGetComponent(out PlayerController player))
+            {
+                player.movingPlatform = this;
+                player.isOnPlatform = true;
+            }
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            if (other.gameObject.TryGetComponent(out PlayerController player))
+            {
+                if (player.movingPlatform = this)
+                {
+                    player.isOnPlatform = false;
+                    player.movingPlatform = null;
+                    if (player.state == PlayerController.States.GroundState)
+                    {
+                        player.velocity.y = 0;
+                    }
+                }
+            }
         }
     }
 }
