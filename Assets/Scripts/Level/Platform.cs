@@ -7,6 +7,8 @@ public class Platform : MonoBehaviour
     private Vector3 startPosi;
     [SerializeField] private float travelTime;
     private float timer;
+    [SerializeField] private bool moveOnEnter;
+
     private BoxCollider boxCollider;
 
     [System.NonSerialized] public Vector3 velocity;
@@ -17,6 +19,7 @@ public class Platform : MonoBehaviour
     {
         moveToEnd,
         moveToStart,
+        dontMove,
     }
     private void Awake()
     {
@@ -26,6 +29,8 @@ public class Platform : MonoBehaviour
 
         boxCollider = GetComponent<BoxCollider>();
         boxCollider.size = transform.GetChild(0).localScale;
+
+        if (moveOnEnter) state = State.dontMove;
 
     }
     private void FixedUpdate()
@@ -37,6 +42,8 @@ public class Platform : MonoBehaviour
                 break;
             case State.moveToStart:
                 Move(endPosi, startPosi, State.moveToEnd);
+                break;
+            case State.dontMove:
                 break;
         }
         velocity = (transform.position - oldPosi) / Time.fixedDeltaTime;
@@ -53,7 +60,12 @@ public class Platform : MonoBehaviour
         else
         {
             timer = 0;
-            state = nextState;
+            if (moveOnEnter)
+            {
+                if (nextState == State.moveToEnd) state = State.dontMove;
+                else state = nextState;
+            }
+            else state = nextState;
         }
     }
     private void OnTriggerEnter(Collider other)
@@ -64,6 +76,10 @@ public class Platform : MonoBehaviour
             {
                 player.movingPlatform = this;
                 player.isOnPlatform = true;
+            }
+            if(moveOnEnter && state == State.dontMove)
+            {
+                state = State.moveToEnd;
             }
         }
     }

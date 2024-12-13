@@ -53,9 +53,19 @@ public class Gate : MonoBehaviour, IActivate
 
         if (currentGoals >= requiredGoals)
         {
-            if (timer != 0) timer = doorOpenDuration - timer;
+            if (timer != 0)
+            {
+                if (fastBack) timer = backDuration - timer;
+                else timer = doorOpenDuration - timer;
+
+            }
 
             travelTime = doorOpenDuration;
+            if (fastBack)
+            {
+                timer *= doorOpenDuration / backDuration;
+            }
+
             state = State.moveToEnd;
 
             if (requirementText != null) requirementText.gameObject.SetActive(false);

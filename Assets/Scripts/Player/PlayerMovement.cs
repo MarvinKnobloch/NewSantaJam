@@ -10,7 +10,8 @@ public class PlayerMovement
         var currentVelocity = player.velocity;
         if (player.isOnPlatform)
         {
-            currentVelocity = player.velocity + player.movingPlatform.velocity * 0.0086f;
+            currentVelocity.x += player.movingPlatform.velocity.x * 0.0086f;
+            currentVelocity.z += player.movingPlatform.velocity.z * 0.0086f;
         }
 
         Vector3 applied;
