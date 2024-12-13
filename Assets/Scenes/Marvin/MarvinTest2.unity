@@ -2653,11 +2653,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -5564588370510742806, guid: 45c7a4d57fb7bdb43a8ba99a9b122c76, type: 3}
       propertyPath: levelIndex
-      value: 2
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: -5564588370510742806, guid: 45c7a4d57fb7bdb43a8ba99a9b122c76, type: 3}
       propertyPath: spawnAtEnd
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6028649537387028908, guid: 45c7a4d57fb7bdb43a8ba99a9b122c76, type: 3}
       propertyPath: m_Name

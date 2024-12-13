@@ -89,6 +89,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""WallGrab"",
+                    ""type"": ""Button"",
+                    ""id"": ""156bb128-4052-4dc0-9a35-1866e3b87fff"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -256,6 +265,17 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""Dash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""44540f70-6df6-4168-910b-476b2a33d72a"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""WallGrab"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -319,6 +339,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Player_Rotate = m_Player.FindAction("Rotate", throwIfNotFound: true);
         m_Player_Reset = m_Player.FindAction("Reset", throwIfNotFound: true);
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
+        m_Player_WallGrab = m_Player.FindAction("WallGrab", throwIfNotFound: true);
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         m_Menu_MenuEsc = m_Menu.FindAction("MenuEsc", throwIfNotFound: true);
@@ -397,6 +418,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Rotate;
     private readonly InputAction m_Player_Reset;
     private readonly InputAction m_Player_Dash;
+    private readonly InputAction m_Player_WallGrab;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
@@ -408,6 +430,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @Rotate => m_Wrapper.m_Player_Rotate;
         public InputAction @Reset => m_Wrapper.m_Player_Reset;
         public InputAction @Dash => m_Wrapper.m_Player_Dash;
+        public InputAction @WallGrab => m_Wrapper.m_Player_WallGrab;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -438,6 +461,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Dash.started += instance.OnDash;
             @Dash.performed += instance.OnDash;
             @Dash.canceled += instance.OnDash;
+            @WallGrab.started += instance.OnWallGrab;
+            @WallGrab.performed += instance.OnWallGrab;
+            @WallGrab.canceled += instance.OnWallGrab;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -463,6 +489,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Dash.started -= instance.OnDash;
             @Dash.performed -= instance.OnDash;
             @Dash.canceled -= instance.OnDash;
+            @WallGrab.started -= instance.OnWallGrab;
+            @WallGrab.performed -= instance.OnWallGrab;
+            @WallGrab.canceled -= instance.OnWallGrab;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -543,6 +572,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnRotate(InputAction.CallbackContext context);
         void OnReset(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
+        void OnWallGrab(InputAction.CallbackContext context);
     }
     public interface IMenuActions
     {

@@ -147,4 +147,11 @@ public class PlayerMovement
             }
         }
     }
+    public void HoldWallGrab()
+    {
+        if (player.controls.Player.WallGrab.IsPressed() == false)
+        {
+            player.SwitchToAirState();
+        }
+    }
 }

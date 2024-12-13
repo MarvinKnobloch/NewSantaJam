@@ -42,6 +42,8 @@ public class PlayerCollision
 
         if (Physics.CapsuleCast(p1, p2, radius, vel.normalized, out hit, dist, player.groundLayers, QueryTriggerInteraction.Ignore))
         {
+            player.canPerformWallGrab = false;
+
             Vector3 snapToSurface = vel.normalized * (hit.distance - player.skinWidth);
             Vector3 leftOver = vel - snapToSurface;
             float angle = Vector3.Angle(hit.normal, Vector3.up);
@@ -85,6 +87,11 @@ public class PlayerCollision
                 {
                     if (player.IsGrounded && player.velocity.y < 0) { player.velocity.y = 0; leftOver.y = 0; }
                     leftOver = Vector3.ProjectOnPlane(leftOver, hit.normal);
+
+                    if (player.state != PlayerController.States.GroundState)
+                    {
+                        player.canPerformWallGrab = true;
+                    }
                 }
             }
 

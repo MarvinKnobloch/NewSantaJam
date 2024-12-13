@@ -11,5 +11,6 @@ namespace Santa
         Level_1,
         Level_2,
         MarvinTest2,
+        MarvinTest3,
     }
 }

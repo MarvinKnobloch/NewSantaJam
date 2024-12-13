@@ -68,6 +68,10 @@ namespace Santa
         public bool isOnPlatform;
         [NonSerialized] public Platform movingPlatform;
 
+        //Wall
+        public bool performedWallGrab;
+        public bool canPerformWallGrab;
+
         // Funktions Delegaten für den Spieler
         public System.Action onJump;
         public System.Action onUse;
@@ -85,6 +89,7 @@ namespace Santa
             GroundToAir,
             AirState,
             DashState,
+            WallGrab,
             Empty,
         }
         void Awake()
@@ -142,6 +147,10 @@ namespace Santa
                 case States.DashState:
                     playerMovement.Dash();
                     break;
+                case States.WallGrab:
+                    playerMovement.RotatePlayer();
+                    playerMovement.HoldWallGrab();
+                    break;
             }
         }
 
@@ -154,6 +163,7 @@ namespace Santa
                 controls.Player.Jump.performed += OnJump;
                 controls.Player.Dash.performed += OnDash;
                 controls.Menu.CheatMode.performed += OnCheat;
+                controls.Player.WallGrab.performed += OnWallGrab;
             }
             else
             {
@@ -162,6 +172,7 @@ namespace Santa
                 controls.Player.Jump.performed -= OnJump;
                 controls.Player.Dash.performed -= OnDash;
                 controls.Menu.CheatMode.performed -= OnCheat;
+                controls.Player.WallGrab.performed -= OnWallGrab;
             }
         }
 
@@ -222,17 +233,24 @@ namespace Santa
                         StartJump();
                         break;
                     case States.AirState:
-                        if (PlayerPrefs.GetInt("DoubleJumpUnlock") == 0) return;
-
-                        if (canDoubleJump == false) return;
-                        if (performNormalJump) return;
-
-                        canDoubleJump = false;
-                        performDoubleJump = true;
-                        StartJump();
+                        CheckDoubleJump();
+                        break;
+                    case States.WallGrab:
+                        CheckDoubleJump();
                         break;
                 }
             }
+        }
+        private void CheckDoubleJump()
+        {
+            if (PlayerPrefs.GetInt("DoubleJumpUnlock") == 0) return;
+
+            if (canDoubleJump == false) return;
+            if (performNormalJump) return;
+
+            canDoubleJump = false;
+            performDoubleJump = true;
+            StartJump();
         }
         private void StartJump()
         {
@@ -256,6 +274,19 @@ namespace Santa
                 }
             }
         }
+        private void OnWallGrab(InputAction.CallbackContext ctx)
+        {
+            if (PlayerPrefs.GetInt("WallGrabUnlock") == 0) return;
+
+            var pressed = ctx.ReadValueAsButton();
+            if (pressed)
+            {
+                if (state == States.GroundState) return;
+                if (state == States.DashState) return;
+
+                if (performedWallGrab == false && canPerformWallGrab) SwitchToWallGrab();
+            }
+        }
         private void OnUse(InputAction.CallbackContext ctx)
         {
             var pressed = ctx.ReadValueAsButton();
@@ -271,6 +302,7 @@ namespace Santa
         }
         public void SwitchToGroundState()
         {
+            performedWallGrab = false;
             canDash = true;
             canDoubleJump = true;
             IsGrounded = true;
@@ -286,6 +318,16 @@ namespace Santa
         {
             IsGrounded = false;
             state = States.AirState;
+        }
+        public void SwitchToWallGrab()
+        {
+            performedWallGrab = true;
+            performNormalJump = false;
+            performDoubleJump = false;
+            canDoubleJump = true;
+
+            velocity = Vector3.zero;
+            state = States.WallGrab;
         }
         public void StartDash()
         {
@@ -307,11 +349,13 @@ namespace Santa
                 {
                     PlayerPrefs.SetInt("DoubleJumpUnlock", 1);
                     PlayerPrefs.SetInt("DashUnlock", 1);
+                    PlayerPrefs.SetInt("WallGrabUnlock", 1);
                 }
                 else
                 {
                     PlayerPrefs.SetInt("DoubleJumpUnlock", 0);
                     PlayerPrefs.SetInt("DashUnlock", 0);
+                    PlayerPrefs.SetInt("WallGrabUnlock", 0);
                 }
                 toogleAbilities = !toogleAbilities;
             }
