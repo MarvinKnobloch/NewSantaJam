@@ -2,6 +2,7 @@ using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System;
+using Events;
 
 namespace Santa
 {
@@ -36,7 +37,7 @@ namespace Santa
         public LayerMask groundLayers = Physics.AllLayers;
 
         #region Properties
-        public bool IsGrounded { get; private set; }
+        public bool IsGrounded { get; set; }
         public bool OnSlope { get; private set; }
         public Vector3 Velocity { get => velocity; }
         public float Speed { get => speed; }
@@ -67,6 +68,7 @@ namespace Santa
         //Platform
         public bool isOnPlatform;
         [NonSerialized] public Platform movingPlatform;
+        [NonSerialized] public Vector3 externalForce;
 
         //Wall
         public bool performedWallGrab;
@@ -81,6 +83,9 @@ namespace Santa
 
         private PlayerMovement playerMovement = new PlayerMovement();
         [NonSerialized] public PlayerCollision playerCollision = new PlayerCollision();
+
+        public IntEventChannelSO stateEventChannel;
+        public BoolEventChannelSO groundedEventChannel;
 
         public States state;
         public enum States
@@ -305,19 +310,19 @@ namespace Santa
             performedWallGrab = false;
             canDash = true;
             canDoubleJump = true;
-            IsGrounded = true;
             state = States.GroundState;
+            stateEventChannel.RaiseEvent((int) state);
         }
         public void SwitchGroundToAir()
         {
             groundToAirTimer = 0;
-            IsGrounded = false;
             state = States.GroundToAir;
+            stateEventChannel.RaiseEvent((int)state);
         }
         public void SwitchToAirState()
         {
-            IsGrounded = false;
             state = States.AirState;
+            stateEventChannel.RaiseEvent((int)state);
         }
         public void SwitchToWallGrab()
         {
@@ -328,17 +333,18 @@ namespace Santa
 
             velocity = Vector3.zero;
             state = States.WallGrab;
+            stateEventChannel.RaiseEvent((int)state);
         }
         public void StartDash()
         {
             performNormalJump = false;
             if (performDoubleJump) performDoubleJump = false;
-            IsGrounded = false;
             velocity = Vector3.zero;
             dashTimer = 0;
             canDash = false;
 
             state = States.DashState;
+            stateEventChannel.RaiseEvent((int)state);
         }
         private void OnCheat(InputAction.CallbackContext ctx)
         {

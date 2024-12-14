@@ -12,6 +12,7 @@ namespace Santa
         public static int Trigger = 9;
         public static int Spieler = 10;
         public static int InteractAble = 12;
+        public static int Platform;
 
         // Gibt eine Maske zurück, die alle übergebenen Layer enthält
         public static int Mask(params int[] layers)
