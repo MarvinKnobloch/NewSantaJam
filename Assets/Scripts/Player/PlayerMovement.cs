@@ -8,33 +8,42 @@ public class PlayerMovement
     public void Movement()
     {
         var currentVelocity = player.velocity;
-        if (player.isOnPlatform)
-        {
-            currentVelocity.x += player.movingPlatform.velocity.x * 0.0086f;
-            currentVelocity.z += player.movingPlatform.velocity.z * 0.0086f;
-        }
 
         Vector3 applied;
         applied = player.transform.rotation * player.moveVector * Time.fixedDeltaTime * player.moveSpeed;
 
         player.velocity = Vector3.Lerp(currentVelocity, applied, Time.fixedDeltaTime * 15f);
         player.velocity.y = currentVelocity.y;
-
-        //if (player.isOnPlatform)
-        //{
-        //    player.velocity += player.movingPlatform.velocity;
-        //}
+        if (player.externalForce != Vector3.zero)
+        {
+            player.velocity += player.externalForce;
+            player.externalForce = Vector3.zero;
+        }
 
         var wasGrounded = player.IsGrounded;
 
         Vector3 movement = player.playerCollision.CollideAndSlide();
         player.speed = new Vector2(movement.x, movement.z).magnitude;
 
+        if (wasGrounded && !player.IsGrounded)
+        {
+            if (player.state == PlayerController.States.GroundState) player.SwitchGroundToAir();
+
+            player.groundedEventChannel.RaiseEvent(player.IsGrounded);
+        }
+
         if (player.IsGrounded && !wasGrounded)
         {
+            if (player.state != PlayerController.States.DashState)
+            {
+                player.SwitchToGroundState();
+            }
+
             var fallDist = (player.fallStartHeight - player.transform.position.y);
             player.fallStartHeight = float.MinValue;
             if (fallDist > 1) player.onLanding?.Invoke(fallDist);
+
+            player.groundedEventChannel.RaiseEvent(player.IsGrounded);
         }
 
         player.rig.MovePosition(player.rig.position + movement);

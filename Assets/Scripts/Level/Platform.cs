@@ -3,6 +3,7 @@ using Santa;
 
 public class Platform : MonoBehaviour
 {
+    private PlatformObject platformObject;
     private Vector3 endPosi;
     private Vector3 startPosi;
     [SerializeField] private float travelTime;
@@ -10,9 +11,6 @@ public class Platform : MonoBehaviour
     [SerializeField] private bool moveOnEnter;
 
     private BoxCollider boxCollider;
-
-    [System.NonSerialized] public Vector3 velocity;
-    private Vector3 oldPosi;
 
     public State state;
     public enum State
@@ -23,82 +21,21 @@ public class Platform : MonoBehaviour
     }
     private void Awake()
     {
+        platformObject = transform.GetChild(0).GetComponent<PlatformObject>();
         startPosi = transform.position;
         endPosi = transform.GetChild(1).transform.position;
         timer = 0;
 
         boxCollider = GetComponent<BoxCollider>();
-        boxCollider.size = transform.GetChild(0).localScale;
+        if (boxCollider)
+        {
+            var collider = platformObject.GetComponent<BoxCollider>();
+            boxCollider.size = Vector3.Scale(collider.size, platformObject.transform.lossyScale);
+            boxCollider.center = collider.center + Vector3.up * 0.2f;
+        }
 
         if (moveOnEnter) state = State.dontMove;
 
     }
-    private void FixedUpdate()
-    {
-        switch (state)
-        {
-            case State.moveToEnd:
-                Move(startPosi, endPosi, State.moveToStart);
-                break;
-            case State.moveToStart:
-                Move(endPosi, startPosi, State.moveToEnd);
-                break;
-            case State.dontMove:
-                break;
-        }
-        velocity = (transform.position - oldPosi) / Time.fixedDeltaTime;
-        oldPosi = transform.position;
-    }
-    private void Move(Vector3 start, Vector3 end, State nextState)
-    {
-        if (timer < travelTime)
-        {
-            float time = timer / travelTime;
-            transform.position = Vector3.Lerp(start, end, time);
-            timer += Time.deltaTime;
-        }
-        else
-        {
-            timer = 0;
-            if (moveOnEnter)
-            {
-                if (nextState == State.moveToEnd) state = State.dontMove;
-                else state = nextState;
-            }
-            else state = nextState;
-        }
-    }
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            if (other.gameObject.TryGetComponent(out PlayerController player))
-            {
-                player.movingPlatform = this;
-                player.isOnPlatform = true;
-            }
-            if(moveOnEnter && state == State.dontMove)
-            {
-                state = State.moveToEnd;
-            }
-        }
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            if (other.gameObject.TryGetComponent(out PlayerController player))
-            {
-                if (player.movingPlatform = this)
-                {
-                    player.isOnPlatform = false;
-                    player.movingPlatform = null;
-                    if (player.state == PlayerController.States.GroundState)
-                    {
-                        player.velocity.y = 0;
-                    }
-                }
-            }
-        }
-    }
+
 }
