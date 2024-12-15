@@ -5,8 +5,8 @@ namespace Santa
     [ExecuteInEditMode]
     public class Bubble : MonoBehaviour
     {
-        public Renderer outerSpace;
-        public Renderer innerSpace;
+        [Range(0, 7)]
+        public int BubbleNumber = 1;
 
         [Space]
         public float speed = 1.0f;
@@ -21,19 +21,14 @@ namespace Santa
         // Vorsichtig sein. Skript wird im Editor ausgeführt!
         void Update()
         {
-            if (outerSpace == null || innerSpace == null) return;
-
             if (Application.isPlaying)
             {
                 Vector3 pos = t.position;
                 pos.z += speed * Time.deltaTime;
                 t.position = pos;
             }
-
-            outerSpace.sharedMaterial.SetVector("_Cut_Position", t.position);
-            innerSpace.sharedMaterial.SetVector("_Cut_Position", t.position);
-            outerSpace.sharedMaterial.SetFloat("_Cut_Radius", t.localScale.x / 2);
-            innerSpace.sharedMaterial.SetFloat("_Cut_Radius", t.localScale.x / 2);
+            if (!BubbleController.Instance) return;
+            BubbleController.Instance.SetBubble(BubbleNumber, t.position, t.localScale.x / 2);
         }
     }
 }

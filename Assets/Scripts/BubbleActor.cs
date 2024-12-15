@@ -4,7 +4,7 @@ namespace Santa
 {
     public class BubbleActor : MonoBehaviour
     {
-        public GameObject bubble;
+        public bool inverted = false;
 
         private Rigidbody rig;
 
@@ -15,15 +15,17 @@ namespace Santa
 
         void Update()
         {
-            if (bubble == null) return;
+            var myDimensionLayer = inverted ? Layers.Dimension_2 : Layers.Dimension_1;
+            var otherDimensionLayer = inverted ? Layers.Dimension_1 : Layers.Dimension_2;
 
-            if (Vector3.Distance(transform.position, bubble.transform.position) < bubble.transform.lossyScale.x / 2.0)
+            rig.excludeLayers = Layers.Mask(otherDimensionLayer);
+            for (int i = 0; i < BubbleController.COUNT; i++)
             {
-                rig.excludeLayers = Layers.Mask(Layers.Dimension_1);
-            }
-            else
-            {
-                rig.excludeLayers = 1 << 8;
+                if (Vector3.Distance(transform.position, BubbleController.Instance.positions[i]) < BubbleController.Instance.radien[i])
+                {
+                    rig.excludeLayers = Layers.Mask(myDimensionLayer);
+                    return;
+                }
             }
         }
     }
