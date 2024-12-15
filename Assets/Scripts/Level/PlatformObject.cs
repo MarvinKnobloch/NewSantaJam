@@ -66,19 +66,33 @@ namespace Santa
                 else state = nextState;
             }
         }
-
-        private void OnCollisionEnter(Collision collision)
+        public void OnMoveEnter()
         {
-            if (collision.collider.TryGetComponent(out PlayerController pc))
+            if (moveOnEnter && state == State.dontMove)
             {
-                pc.externalForce.x = _velocity.x;
-                pc.externalForce.z = _velocity.z;
+                timer = 0;
+                state = State.moveToEnd;
             }
         }
 
-        private void OnCollisionStay(Collision collision)
-        {
-            OnCollisionEnter(collision);
-        }
+        //private void OnCollisionEnter(Collision collision)
+        //{
+        //    Debug.Log("start move");
+        //    if (collision.collider.TryGetComponent(out PlayerController pc))
+        //    {
+        //        if(moveOnEnter && state == State.dontMove)
+        //        {
+        //            timer = 0;
+        //            state = State.moveToEnd;
+        //        }
+        //        pc.externalForce.x = _velocity.x;
+        //        pc.externalForce.z = _velocity.z;
+        //    }
+        //}
+
+        //private void OnCollisionStay(Collision collision)
+        //{
+        //    OnCollisionEnter(collision);
+        //}
     }
 }

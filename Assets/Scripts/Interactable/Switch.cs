@@ -26,7 +26,7 @@ public class Switch : MonoBehaviour, IInteractable, ITrigger
 
     public string GetInteractionHint()
     {
-        return "Use leaver";
+        return "Use lever";
     }
 
     public void Interact(MonoBehaviour user)
