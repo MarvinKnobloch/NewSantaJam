@@ -50,14 +50,17 @@ public class PlayerCollision
                 {
                     if (player.IsGrounded && snapToSurface.y < -1f) snapToSurface.y = -1f;
 
-                    if (hit.collider.gameObject.TryGetComponent(out IPlatform other))
+                    if (hit.collider.gameObject.TryGetComponent(out PlatformObject other))
                     {
+                        other.OnMoveEnter();
+
                         leftOver = other.velocity;
                         leftOver.y = 0;
                         var delta = CollideAndSlide(pos + snapToSurface, leftOver, origDir, false, depth + 1);
                         snapToSurface += delta;
-                        Debug.Log("Platform Collide: " + other.velocity + ", " + delta);
+                        //Debug.Log("Platform Collide: " + other.velocity + ", " + delta);
                         snapToSurface.y += other.velocity.y;
+
                         /*if (other.velocity.y != 0)
                         {
                             leftOver = Vector3.zero;
