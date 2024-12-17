@@ -14,7 +14,7 @@ namespace Santa
         private static GameSettings settings;
         public static bool testMode = false;
 
-        public bool spawnAtEnd = false;
+        //public bool spawnAtEnd = false;
 
         [SerializeField] private AudioMixer audioMixer;
 

@@ -120,7 +120,7 @@ public class MenuController : MonoBehaviour
     public void NewGame()
     {
         AudioController.Instance.PlaySoundOneshot((int)AudioController.Sounds.menuButton);
-        GameManager.Instance.spawnAtEnd = false;
+        //GameManager.Instance.spawnAtEnd = false;
 
         gameIsPaused = false;
         Time.timeScale = 1;
