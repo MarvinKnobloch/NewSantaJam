@@ -41,6 +41,12 @@ namespace Santa
             t.position.ToFloatVec(ref _pos);
             rotation = t.rotation.eulerAngles.y;
             this.progress = progress.Clone();
+
+            PlayerPrefs.SetInt("SceneNumber", scene.buildIndex);
+            PlayerPrefs.SetFloat("SavePlayerXPosition", t.position.x);
+            PlayerPrefs.SetFloat("SavePlayerYPosition", t.position.y);
+            PlayerPrefs.SetFloat("SavePlayerZPosition", t.position.z);
+            PlayerPrefs.SetFloat("SavePlayerRotation", t.rotation.eulerAngles.y);
         }
     }
 }

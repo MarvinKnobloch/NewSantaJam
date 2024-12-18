@@ -13,6 +13,7 @@ namespace Santa
         public static GameManager Instance;
         private static GameSettings settings;
         public static bool testMode = false;
+        private bool loadFormMenu;
 
         //public bool spawnAtEnd = false;
 
@@ -104,8 +105,16 @@ namespace Santa
         {
             //var currentScene = levelStart.GetScene();
 
+            if (loadFormMenu)
+            {
+                loadFormMenu = false;
+                Vector3 playerPosition = new Vector3(PlayerPrefs.GetFloat("SavePlayerXPosition"), PlayerPrefs.GetFloat("SavePlayerYPosition"), PlayerPrefs.GetFloat("SavePlayerZPosition"));
+                levelStart.transform.SetLocalPositionAndRotation(playerPosition, Quaternion.Euler(0, PlayerPrefs.GetFloat("SavePlayerRotation"), 0));
+
+                CreateCheckpoint(levelStart.gameObject.scene, levelStart.transform);
+            }
             // Gibt es einen Checkpoint?
-            if (checkpoint.active && checkpoint.sceneIndex == levelStart.GetScene())
+            else if (checkpoint.active && checkpoint.sceneIndex == levelStart.GetScene())
             {
                 LoadLastCheckpoint();
                 levelStart.transform.SetLocalPositionAndRotation(checkpoint.position, Quaternion.Euler(0, checkpoint.rotation, 0));
@@ -115,8 +124,8 @@ namespace Santa
                 Debug.Log("Registriere Rücksetzpunkt in Szene " + levelStart.gameObject.scene.name);
                 CreateCheckpoint(levelStart.gameObject.scene, levelStart.transform);
 
-                savestate.sceneIndex = levelStart.GetScene();
-                savestate.Save();
+                //savestate.sceneIndex = levelStart.GetScene();
+                //savestate.Save();
             }
 
             levelStart.CreatePlayer();
@@ -225,6 +234,10 @@ namespace Santa
         {
             checkpoint = new CheckpointData();
             savestate = new Savestate();
+        }
+        public void LoadFormMenu()
+        {
+            loadFormMenu = true;
         }
         #endregion
 

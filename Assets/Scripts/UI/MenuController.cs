@@ -5,8 +5,6 @@ using Santa;
 
 public class MenuController : MonoBehaviour
 {
-    //public static MenuController Instance;
-
     private Controls controls;
 
     private GameObject baseMenu;
@@ -18,12 +16,6 @@ public class MenuController : MonoBehaviour
 
     private void Awake()
     {
-        //if (Instance == null)
-        //{
-        //    Instance = this;
-        //}
-        //else Destroy(gameObject);
-
         controls = Keybindinputmanager.inputActions;
         controls.Enable();
 
@@ -86,9 +78,6 @@ public class MenuController : MonoBehaviour
         {
             currentOpenMenu = currentMenu;
             currentMenu.SetActive(true);
-            //LevelSelection.SetActive(currentMenu == LevelSelection);
-            //Settings.SetActive(currentMenu == Settings);
-            //Credits.SetActive(currentMenu == Credits);
 
             mainMenu.SetActive(false);
             ingameMenu.SetActive(false);
@@ -103,13 +92,21 @@ public class MenuController : MonoBehaviour
 
         if (PlayerPrefs.GetInt("NewGame") == 0)
         {
-            //PlayerPrefs.SetInt("NewGame", 1);
-            //Set new game PlayerPrefs
-            SceneManager.LoadScene("IntroScene");
+            GameManager.Instance.LoadFormMenu();
+
+            PlayerPrefs.SetInt("SceneNumber", (int)SceneEnum.Level1);
+            PlayerPrefs.SetFloat("SavePlayerXPosition", 18);
+            PlayerPrefs.SetFloat("SavePlayerYPosition", 1);
+            PlayerPrefs.SetFloat("SavePlayerZPosition", -53);
+            PlayerPrefs.SetFloat("SavePlayerRotation", 0);
+
+            PlayerPrefs.SetInt("NewGame", 1);
+            SceneManager.LoadScene((int)SceneEnum.Level1); //SceneManager.LoadScene("IntroScene");
         }
         else
         {
-            //Load Game
+            GameManager.Instance.LoadFormMenu();
+            SceneManager.LoadScene(PlayerPrefs.GetInt("SceneNumber"));
         }
     }
     public void ResumeGame()

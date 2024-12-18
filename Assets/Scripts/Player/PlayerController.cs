@@ -74,6 +74,9 @@ namespace Santa
         public bool performedWallGrab;
         public bool canPerformWallGrab;
 
+        //Reset
+        private bool resetPerformed;
+
         // Funktions Delegaten für den Spieler
         public System.Action onJump;
         public System.Action onUse;
@@ -169,6 +172,7 @@ namespace Santa
                 controls.Player.Dash.performed += OnDash;
                 controls.Menu.CheatMode.performed += OnCheat;
                 controls.Player.WallGrab.performed += OnWallGrab;
+                controls.Player.Reset.performed += OnReset;
             }
             else
             {
@@ -178,6 +182,7 @@ namespace Santa
                 controls.Player.Dash.performed -= OnDash;
                 controls.Menu.CheatMode.performed -= OnCheat;
                 controls.Player.WallGrab.performed -= OnWallGrab;
+                controls.Player.Reset.performed -= OnReset;
             }
         }
 
@@ -281,6 +286,8 @@ namespace Santa
         }
         private void OnWallGrab(InputAction.CallbackContext ctx)
         {
+            return;
+
             if (PlayerPrefs.GetInt("WallGrabUnlock") == 0) return;
 
             var pressed = ctx.ReadValueAsButton();
@@ -298,6 +305,15 @@ namespace Santa
             if (pressed)
             {
                 onUse.Invoke();
+            }
+        }
+        private void OnReset(InputAction.CallbackContext ctx)
+        {
+            var pressed = ctx.ReadValueAsButton();
+            if (pressed && resetPerformed == false)
+            {
+                resetPerformed = true;
+                Player.Instance.die();
             }
         }
 
