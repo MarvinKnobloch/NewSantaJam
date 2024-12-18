@@ -12,7 +12,7 @@ namespace Santa
         {
             if (other.gameObject.layer == Layers.Spieler)
             {
-                GameManager.Instance.spawnAtEnd = spawnAtEnd;
+                //GameManager.Instance.spawnAtEnd = spawnAtEnd;
                 GameManager.Instance.LoadScene(levelIndex);
             }
         }

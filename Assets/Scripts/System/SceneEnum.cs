@@ -7,11 +7,13 @@ namespace Santa
         Keine = -1,
         Hauptmenü = 0,
         IntroSzene,
-        MarvinTest,
-        Level_1,
-        Level_2,
-        MarvinTest2,
-        MarvinTest3,
-        Level4
+        TestLevel_1,
+        TestLevel_2,
+        Level1,
+        Level2,
+        Level3,
+        Level4,
+        Level5,
+
     }
 }

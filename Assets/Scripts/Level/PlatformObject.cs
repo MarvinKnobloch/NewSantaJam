@@ -9,6 +9,7 @@ namespace Santa
         [SerializeField] private float travelTime;
         private float timer;
         [SerializeField] private bool moveOnEnter;
+        [SerializeField] private bool onlyMoveOnce;
 
         public State state;
         public enum State
@@ -16,6 +17,7 @@ namespace Santa
             moveToEnd,
             moveToStart,
             dontMove,
+            stopForever,
         }
 
         public Vector3 velocity { get { return _velocity; } set { _velocity = value; } }
@@ -43,6 +45,8 @@ namespace Santa
                     break;
                 case State.dontMove:
                     break;
+                case State.stopForever:
+                    break;
             }
         }
         private void Move(Vector3 start, Vector3 end, State nextState)
@@ -58,9 +62,19 @@ namespace Santa
             else
             {
                 timer = 0;
-                if (moveOnEnter)
+
+                if (onlyMoveOnce)
                 {
-                    if (nextState == State.moveToEnd) state = State.dontMove;
+                    velocity = Vector3.zero;
+                    state = State.stopForever;
+                }
+                else if (moveOnEnter)
+                {
+                    if (nextState == State.moveToEnd) 
+                    {
+                        velocity = Vector3.zero;
+                        state = State.dontMove;
+                    }
                     else state = nextState;
                 }
                 else state = nextState;
