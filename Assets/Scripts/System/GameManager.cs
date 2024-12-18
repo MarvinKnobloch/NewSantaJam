@@ -74,7 +74,7 @@ namespace Santa
 
             DontDestroyOnLoad(gameObject);
             gameUIChannel.OnEventRaised += ActivateGameUI;
-            settings = new GameSettings().Load();
+            settings = new GameSettings().LoadMouseSetting();
             ResetProgress();
 
             var sceneValues = System.Enum.GetValues(typeof(SceneEnum));
@@ -153,24 +153,6 @@ namespace Santa
         {
             gameUI.SetActive(active);
         }
-
-
-        public static void ExitGame()
-        {
-            try
-            {
-                Settings.Save();
-            }
-            finally
-            {
-#if UNITY_EDITOR
-                EditorApplication.isPlaying = false;
-#else
-                Application.Quit();
-#endif
-            }
-        }
-
         public void LoadScene(SceneEnum scene)
         {
 
@@ -193,7 +175,7 @@ namespace Santa
                 catch { /* ignore */ }
             }
             checkpoint.UpdateCheckpoint(scene, playerSpawnpoint, savestate);
-            Settings.Save();
+            //Settings.Save();
         }
 
         public void AddMementoObject(IMemento owner)
