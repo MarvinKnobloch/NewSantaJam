@@ -99,6 +99,8 @@ public class MenuController : MonoBehaviour
             PlayerPrefs.SetFloat("SavePlayerYPosition", 1);
             PlayerPrefs.SetFloat("SavePlayerZPosition", -53);
             PlayerPrefs.SetFloat("SavePlayerRotation", 0);
+            PlayerPrefs.SetInt("DoubleJumpUnlock", 0);
+            PlayerPrefs.SetInt("DashUnlock", 0);
 
             PlayerPrefs.SetInt("NewGame", 1);
             SceneManager.LoadScene((int)SceneEnum.Level1); //SceneManager.LoadScene("IntroScene");
@@ -117,13 +119,12 @@ public class MenuController : MonoBehaviour
     public void NewGame()
     {
         AudioController.Instance.PlaySoundOneshot((int)AudioController.Sounds.menuButton);
-        //GameManager.Instance.spawnAtEnd = false;
+        currentOpenMenu.SetActive(false);
+
+        PlayerPrefs.SetInt("NewGame", 0);
 
         gameIsPaused = false;
         Time.timeScale = 1;
-        PlayerPrefs.SetInt("DoubleJumpUnlock", 0);
-        PlayerPrefs.SetInt("DashUnlock", 0);
-        PlayerPrefs.SetInt("NewGame", 0);
         StartGame();
     }
     public void BackToMainMenu()

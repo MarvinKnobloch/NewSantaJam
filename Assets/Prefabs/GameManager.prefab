@@ -770,7 +770,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bd07638996b0ed42b2c77295a2f52dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnAtEnd: 0
   audioMixer: {fileID: 24100000, guid: 7a6ebf26ff12c234589fee82c4c9c2d6, type: 2}
   gameUI: {fileID: 6777707621383753880}
   interactionText: {fileID: 4350508405711632956}
