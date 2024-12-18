@@ -20,6 +20,8 @@ public class AudioController : MonoBehaviour
     public enum Songs
     {
         empty,
+        song1,
+        song2,
     }
     public enum Sounds
     {
