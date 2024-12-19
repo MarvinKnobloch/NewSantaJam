@@ -796,8 +796,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 363cc581b696d2545a78eec1869ed553, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cutOutMaterial: {fileID: 2100000, guid: b664d4532eb16c2488ad798ef40e90c4, type: 2}
-  CutInMaterial: {fileID: 2100000, guid: 48fdf166362d3874091bb8fe192ca9ec, type: 2}
+  cutOutMaterials:
+  - {fileID: 2100000, guid: b664d4532eb16c2488ad798ef40e90c4, type: 2}
+  CutInMaterials:
+  - {fileID: 2100000, guid: 48fdf166362d3874091bb8fe192ca9ec, type: 2}
 --- !u!4 &1027261207
 Transform:
   m_ObjectHideFlags: 0

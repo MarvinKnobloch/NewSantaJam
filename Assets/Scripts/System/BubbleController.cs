@@ -10,8 +10,8 @@ namespace Santa
 
         public static BubbleController Instance;
 
-        public Material cutOutMaterial;
-        public Material CutInMaterial;
+        public Material[] cutOutMaterials;
+        public Material[] CutInMaterials;
 
         public readonly Vector4[] positions = new Vector4[COUNT];
         public readonly float[] radien = new float[COUNT];
@@ -52,11 +52,17 @@ namespace Santa
         {
             for (int i = 0; i < COUNT; i++)
             {
-                cutOutMaterial.SetVector(pos_props[i], positions[i]);
-                cutOutMaterial.SetFloat(rad_props[i], radien[i]);
+                for (int j = 0; j < cutOutMaterials.Length; j++)
+                {
+                    cutOutMaterials[j].SetVector(pos_props[i], positions[i]);
+                    cutOutMaterials[j].SetFloat(rad_props[i], radien[i]);
+                }
 
-                CutInMaterial.SetVector(pos_props[i], positions[i]);
-                CutInMaterial.SetFloat(rad_props[i], radien[i]);
+                for (int j = 0; j < CutInMaterials.Length; j++)
+                {
+                    CutInMaterials[j].SetVector(pos_props[i], positions[i]);
+                    CutInMaterials[j].SetFloat(rad_props[i], radien[i]);
+                }
             }
         }
     }
