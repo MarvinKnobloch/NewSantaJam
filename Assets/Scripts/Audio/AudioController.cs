@@ -27,6 +27,17 @@ public class AudioController : MonoBehaviour
     {
         empty,
         menuButton,
+        jump,
+        doubleJump,
+        dash,
+        land,
+        lever,
+        elevator,
+        collect,
+        death,
+        secret,
+        victory,
+
     }
 
     private void Awake()

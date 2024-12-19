@@ -238,11 +238,10 @@ namespace Santa
                 {
                     case States.GroundState:
                         performNormalJump = true;
-                        StartJump();
+                        Jump();
                         break;
                     case States.GroundToAir:
-                        performNormalJump = true;
-                        StartJump();
+                        Jump();
                         break;
                     case States.AirState:
                         CheckDoubleJump();
@@ -252,6 +251,13 @@ namespace Santa
                         break;
                 }
             }
+        }
+        private void Jump()
+        {
+            performNormalJump = true;
+            StartJump();
+
+            AudioController.Instance.PlaySoundOneshot((int)AudioController.Sounds.jump);
         }
         private void CheckDoubleJump()
         {
@@ -263,6 +269,8 @@ namespace Santa
             canDoubleJump = false;
             performDoubleJump = true;
             StartJump();
+
+            AudioController.Instance.PlaySoundOneshot((int)AudioController.Sounds.doubleJump);
         }
         private void StartJump()
         {
@@ -363,6 +371,8 @@ namespace Santa
 
             state = States.DashState;
             stateEventChannel.RaiseEvent((int)state);
+
+            AudioController.Instance.PlaySoundOneshot((int)AudioController.Sounds.dash);
         }
         private void OnCheat(InputAction.CallbackContext ctx)
         {
