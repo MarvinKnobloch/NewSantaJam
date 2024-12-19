@@ -132,7 +132,9 @@ namespace Santa
             controls.Player.Disable();
             EnableMovementInputs(false);
             EnableActionInputs(false);
+            Cursor.lockState = CursorLockMode.Confined;
         }
+
         private void FixedUpdate()
         {
             switch (state)

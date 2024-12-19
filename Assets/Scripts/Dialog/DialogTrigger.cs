@@ -3,23 +3,28 @@ using Events;
 
 namespace Santa
 {
-    public class DialogTrigger : MonoBehaviour, ITrigger
+    public class DialogTrigger : MonoBehaviour, IInteractable
     {
         public bool active = true;
         public Dialog dialog;
 
         public DialogEventChannelSO dialogEventChannel;
 
-        public bool CanBeTriggered()
+        public bool CanInteractWith(MonoBehaviour user)
         {
             return active;
         }
 
-        public void Trigger(MonoBehaviour user, TriggerCommand cmd)
+        public string GetInteractionHint()
+        {
+            return "Speak";
+        }
+
+        public void Interact(MonoBehaviour user)
         {
             if (dialog != null)
             {
-                dialogEventChannel.RaiseEvent(dialog);
+                dialogEventChannel.RaiseEvent(dialog, 0);
             }
         }
     }
