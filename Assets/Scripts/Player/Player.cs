@@ -84,6 +84,7 @@ public class Player : MonoBehaviour
             {
                 oldClosetstInteractable = null;
             }
+            foundInteractable = null;
         }
     }
     private void getclosestinteraction()
@@ -164,8 +165,11 @@ public class Player : MonoBehaviour
     {
         if (other.gameObject.TryGetComponent(out IInteractable interactable))
         {
+            Debug.Log("Onexit");
             if (interactionObjs.Contains(interactable))
             {
+                Debug.Log("remove");
+
                 interactionObjs.Remove(interactable);
                 ScanInteractables();
             }
