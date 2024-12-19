@@ -25,9 +25,9 @@ MonoBehaviour:
     text: "Mir scheint, das hast du nicht erwartet.\nDabei bist du doch auf der Suche
       nach etwas Umgew\xF6hnlichem, nicht wahr?"
   - name: Junge
-    text: Ich suche nach dem Weinachtsmann.
+    text: Ich suche nach dem Weihnachtsmann.
   - name: Junge
     text: Der Karte nach muss das hier irgendwo sein.
   - name: Katze
-    text: "Du suchst nach einem Magischen Ort. Eine gew\xF6hnliche Karte  wird dir
+    text: "Du suchst nach einem Magischen Ort. Eine gew\xF6hnliche Karte wird dir
       dabei nicht helfen.\nWas du brauchst, ist etwas Magie."
