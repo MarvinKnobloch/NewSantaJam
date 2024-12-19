@@ -62,6 +62,7 @@ public class Switch : MonoBehaviour, IInteractable, ITrigger
                     activate.Activate();
                 }
             }
+            AudioController.Instance.PlaySoundOneshot((int)AudioController.Sounds.lever);
         }
         else
         {
@@ -72,6 +73,7 @@ public class Switch : MonoBehaviour, IInteractable, ITrigger
                     activate.Deactivate();
                 }
             }
+            AudioController.Instance.PlaySoundOneshot((int)AudioController.Sounds.lever);
         }
     }
 }

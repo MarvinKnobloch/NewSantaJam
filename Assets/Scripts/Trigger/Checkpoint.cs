@@ -45,10 +45,12 @@ namespace Santa
                 if (currentCheckPoint != null)
                 {
                     if (currentCheckPoint == this) return;
-                    currentCheckPoint.DeactivateVisual(); 
+                    currentCheckPoint.DeactivateVisual();
                 }
                 currentCheckPoint = this;
                 currentCheckPoint.ActivateVisual();
+
+                AudioController.Instance.PlaySoundOneshot((int)AudioController.Sounds.secret);
             }
         }
         public void ActivateVisual()

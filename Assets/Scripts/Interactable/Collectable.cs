@@ -29,6 +29,7 @@ public class Collectable : MonoBehaviour, ITrigger
                 activate.Activate();
             }
         }
+        AudioController.Instance.PlaySoundOneshot((int)AudioController.Sounds.collect);
         gameObject.SetActive(false);
     }
 }

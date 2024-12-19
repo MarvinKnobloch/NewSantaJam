@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
     [SerializeField] private LayerMask useMask;
     [SerializeField] private float deathFallHeight;
     [SerializeField] private float deathHeight = -24f;
+    private bool isDead;
 
     private List<IInteractable> interactionObjs = new List<IInteractable>();
     private IInteractable oldClosetstInteractable;
@@ -112,9 +113,14 @@ public class Player : MonoBehaviour
 
     public void die()
     {
+        if (isDead) return;
+
+        isDead = true;
         if (GameManager.Instance.godmode) return;
         controller.enabled = false;
         Invoke("Reload", 0.25f);
+
+        AudioController.Instance.PlaySoundOneshot((int)AudioController.Sounds.death);
     }
 
     private void Reload()
