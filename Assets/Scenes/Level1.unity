@@ -4211,6 +4211,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2701688677648764931, guid: 46d1e1178c41d7c4c9d4ea9977a94a0b, type: 3}
   m_PrefabInstance: {fileID: 533699754}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &540735951 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1669682822782821311, guid: a22d1855bbc537f499ba64b12fa2589b, type: 3}
+  m_PrefabInstance: {fileID: 1505875954440805207}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &559933845
 GameObject:
   m_ObjectHideFlags: 0
@@ -11262,6 +11267,7 @@ Transform:
   - {fileID: 2031403080}
   - {fileID: 1119217823}
   - {fileID: 379174701}
+  - {fileID: 540735951}
   m_Father: {fileID: 2062977911}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1700623645
@@ -14176,6 +14182,68 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8344342361573427295, guid: 46d1e1178c41d7c4c9d4ea9977a94a0b, type: 3}
   m_PrefabInstance: {fileID: 5853772115816458774}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1505875954440805207
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1697740402}
+    m_Modifications:
+    - target: {fileID: 668586957594750059, guid: a22d1855bbc537f499ba64b12fa2589b, type: 3}
+      propertyPath: m_Name
+      value: Hint
+      objectReference: {fileID: 0}
+    - target: {fileID: 1669682822782821311, guid: a22d1855bbc537f499ba64b12fa2589b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 26.23
+      objectReference: {fileID: 0}
+    - target: {fileID: 1669682822782821311, guid: a22d1855bbc537f499ba64b12fa2589b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.17
+      objectReference: {fileID: 0}
+    - target: {fileID: 1669682822782821311, guid: a22d1855bbc537f499ba64b12fa2589b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -20.74
+      objectReference: {fileID: 0}
+    - target: {fileID: 1669682822782821311, guid: a22d1855bbc537f499ba64b12fa2589b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1669682822782821311, guid: a22d1855bbc537f499ba64b12fa2589b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1669682822782821311, guid: a22d1855bbc537f499ba64b12fa2589b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1669682822782821311, guid: a22d1855bbc537f499ba64b12fa2589b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1669682822782821311, guid: a22d1855bbc537f499ba64b12fa2589b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1669682822782821311, guid: a22d1855bbc537f499ba64b12fa2589b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1669682822782821311, guid: a22d1855bbc537f499ba64b12fa2589b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2580064604979717003, guid: a22d1855bbc537f499ba64b12fa2589b, type: 3}
+      propertyPath: messageText
+      value: Use <color=green> W/A/S/D </color> to move and <color=green> sapace
+        </color> to jump. Holding space will increase your jumpheight.
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a22d1855bbc537f499ba64b12fa2589b, type: 3}
 --- !u!65 &1605089861814675445
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14499,7 +14567,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1321356394707797692, guid: 521a8163ae95acd4d810b1dc8887056d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -21.92
+      value: -24.52
       objectReference: {fileID: 0}
     - target: {fileID: 1321356394707797692, guid: 521a8163ae95acd4d810b1dc8887056d, type: 3}
       propertyPath: m_LocalRotation.w
