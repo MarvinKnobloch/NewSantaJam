@@ -326,6 +326,65 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Dialog"",
+            ""id"": ""a671204b-9fb2-4682-92de-17bc3117a3d6"",
+            ""actions"": [
+                {
+                    ""name"": ""Next"",
+                    ""type"": ""Button"",
+                    ""id"": ""f957883c-0aed-4714-9f7f-ef0bc7124b2e"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Close"",
+                    ""type"": ""Button"",
+                    ""id"": ""7b74efb6-6b44-464b-8d2e-41b750e2c845"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""583c25bc-1bc6-4836-8eb4-9b06d4da4435"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Next"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""877bc126-6730-4c07-9213-d33654cb5007"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Next"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b08cb2f6-7ab2-403e-bd97-81fbd6fd7c48"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Close"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -344,12 +403,17 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         m_Menu_MenuEsc = m_Menu.FindAction("MenuEsc", throwIfNotFound: true);
         m_Menu_CheatMode = m_Menu.FindAction("CheatMode", throwIfNotFound: true);
+        // Dialog
+        m_Dialog = asset.FindActionMap("Dialog", throwIfNotFound: true);
+        m_Dialog_Next = m_Dialog.FindAction("Next", throwIfNotFound: true);
+        m_Dialog_Close = m_Dialog.FindAction("Close", throwIfNotFound: true);
     }
 
     ~@Controls()
     {
         UnityEngine.Debug.Assert(!m_Player.enabled, "This will cause a leak and performance issues, Controls.Player.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_Menu.enabled, "This will cause a leak and performance issues, Controls.Menu.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_Dialog.enabled, "This will cause a leak and performance issues, Controls.Dialog.Disable() has not been called.");
     }
 
     public void Dispose()
@@ -563,6 +627,60 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         }
     }
     public MenuActions @Menu => new MenuActions(this);
+
+    // Dialog
+    private readonly InputActionMap m_Dialog;
+    private List<IDialogActions> m_DialogActionsCallbackInterfaces = new List<IDialogActions>();
+    private readonly InputAction m_Dialog_Next;
+    private readonly InputAction m_Dialog_Close;
+    public struct DialogActions
+    {
+        private @Controls m_Wrapper;
+        public DialogActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Next => m_Wrapper.m_Dialog_Next;
+        public InputAction @Close => m_Wrapper.m_Dialog_Close;
+        public InputActionMap Get() { return m_Wrapper.m_Dialog; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(DialogActions set) { return set.Get(); }
+        public void AddCallbacks(IDialogActions instance)
+        {
+            if (instance == null || m_Wrapper.m_DialogActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_DialogActionsCallbackInterfaces.Add(instance);
+            @Next.started += instance.OnNext;
+            @Next.performed += instance.OnNext;
+            @Next.canceled += instance.OnNext;
+            @Close.started += instance.OnClose;
+            @Close.performed += instance.OnClose;
+            @Close.canceled += instance.OnClose;
+        }
+
+        private void UnregisterCallbacks(IDialogActions instance)
+        {
+            @Next.started -= instance.OnNext;
+            @Next.performed -= instance.OnNext;
+            @Next.canceled -= instance.OnNext;
+            @Close.started -= instance.OnClose;
+            @Close.performed -= instance.OnClose;
+            @Close.canceled -= instance.OnClose;
+        }
+
+        public void RemoveCallbacks(IDialogActions instance)
+        {
+            if (m_Wrapper.m_DialogActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IDialogActions instance)
+        {
+            foreach (var item in m_Wrapper.m_DialogActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_DialogActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public DialogActions @Dialog => new DialogActions(this);
     public interface IPlayerActions
     {
         void OnMovement(InputAction.CallbackContext context);
@@ -578,5 +696,10 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     {
         void OnMenuEsc(InputAction.CallbackContext context);
         void OnCheatMode(InputAction.CallbackContext context);
+    }
+    public interface IDialogActions
+    {
+        void OnNext(InputAction.CallbackContext context);
+        void OnClose(InputAction.CallbackContext context);
     }
 }

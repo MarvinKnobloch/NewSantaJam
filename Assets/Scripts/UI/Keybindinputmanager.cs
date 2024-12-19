@@ -8,7 +8,7 @@ using TMPro;
 
 public class Keybindinputmanager : MonoBehaviour
 {
-    public static Controls inputActions;
+    private static Controls inputActions;
 
     public static event Action keyrebindfinished;                                    //für udatebinding UI
     public static event Action keyrebindcanceled;                                    //für udatebinding UI
@@ -16,11 +16,15 @@ public class Keybindinputmanager : MonoBehaviour
 
     public static Text keyrebindtext;
 
-    private void Awake()
+    public static Controls Controls
     {
-        if (inputActions == null)
+        get
         {
-            inputActions = new Controls();
+            if (inputActions == null)
+            {
+                inputActions = new Controls();
+            }
+            return inputActions;
         }
     }
 

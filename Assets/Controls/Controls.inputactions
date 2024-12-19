@@ -304,6 +304,65 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Dialog",
+            "id": "a671204b-9fb2-4682-92de-17bc3117a3d6",
+            "actions": [
+                {
+                    "name": "Next",
+                    "type": "Button",
+                    "id": "f957883c-0aed-4714-9f7f-ef0bc7124b2e",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Close",
+                    "type": "Button",
+                    "id": "7b74efb6-6b44-464b-8d2e-41b750e2c845",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "583c25bc-1bc6-4836-8eb4-9b06d4da4435",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Next",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "877bc126-6730-4c07-9213-d33654cb5007",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Next",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b08cb2f6-7ab2-403e-bd97-81fbd6fd7c48",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Close",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

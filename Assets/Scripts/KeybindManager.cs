@@ -10,7 +10,7 @@ namespace Santa
         {
             if (inputActions == null)
             {
-                inputActions = Keybindinputmanager.inputActions; //new Controls();
+                inputActions = Keybindinputmanager.Controls;
             }
         }
     }

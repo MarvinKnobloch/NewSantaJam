@@ -24,7 +24,7 @@ public class MenuController : MonoBehaviour
         //}
         //else Destroy(gameObject);
 
-        controls = Keybindinputmanager.inputActions;
+        controls = Keybindinputmanager.Controls;
         controls.Enable();
 
         if (SceneManager.GetActiveScene().buildIndex == 0)

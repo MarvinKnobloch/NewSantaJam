@@ -48,6 +48,46 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -6534956040264019059, guid: f1d157e1f5220e348ad4d70be7185934, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -6534956040264019059, guid: f1d157e1f5220e348ad4d70be7185934, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -6534956040264019059, guid: f1d157e1f5220e348ad4d70be7185934, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -1949611716174475895, guid: f1d157e1f5220e348ad4d70be7185934, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -1949611716174475895, guid: f1d157e1f5220e348ad4d70be7185934, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -1949611716174475895, guid: f1d157e1f5220e348ad4d70be7185934, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -1780817227574157615, guid: f1d157e1f5220e348ad4d70be7185934, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 5adfba6380c62bd49a23fe106411f692, type: 2}
+    - target: {fileID: -231927435665765468, guid: f1d157e1f5220e348ad4d70be7185934, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -231927435665765468, guid: f1d157e1f5220e348ad4d70be7185934, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -231927435665765468, guid: f1d157e1f5220e348ad4d70be7185934, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: f1d157e1f5220e348ad4d70be7185934, type: 3}
       propertyPath: m_Name
       value: Fee
