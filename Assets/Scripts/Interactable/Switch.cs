@@ -74,7 +74,7 @@ public class Switch : MonoBehaviour, IInteractable, ITrigger
             if (animator)
             {
                 audio.PlayOneShot(gearSound);
-                animator.SetTrigger("ON");
+                animator.SetBool("ON", true);
             }
             AudioController.Instance.PlaySoundOneshot((int)AudioController.Sounds.lever);
         }
@@ -90,7 +90,7 @@ public class Switch : MonoBehaviour, IInteractable, ITrigger
             if (animator)
             {
                 audio.PlayOneShot(gearSound);
-                animator.SetTrigger("OFF");
+                animator.SetBool("ON", false);
             }
             AudioController.Instance.PlaySoundOneshot((int)AudioController.Sounds.lever);
         }
