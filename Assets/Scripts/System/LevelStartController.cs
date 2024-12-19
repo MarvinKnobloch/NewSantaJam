@@ -9,15 +9,9 @@ namespace Santa
         [SerializeField] private Player playerPrefab;
         public PlayableDirector intro;
 
-        //[SerializeField] private bool spawnAtEnd;
-
         void Start()
         {
-            //if (spawnAtEnd == GameManager.Instance.spawnAtEnd)
-            {
-
-                GameManager.Instance.LevelStartControllerAwake(this);
-            }
+            GameManager.Instance.LevelStartControllerAwake(this);
         }
 
         public void CreatePlayer()

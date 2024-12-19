@@ -77,25 +77,20 @@ namespace Santa
         }
         #endregion
 
-        public void Save()
+        public GameSettings LoadMouseSetting()
         {
-            PlayerPrefs.SetInt("MusicVolume", musicVolume);
-            PlayerPrefs.SetInt("SoundVolume", soundVolume);
-            PlayerPrefs.SetInt("AudioKeyVolume", audioKeyVolume);
-            PlayerPrefs.SetFloat("MouseSensitivityX", mouseSensitivityX);
-            PlayerPrefs.SetFloat("MouseSensitivityY", mouseSensitivityY);
-            PlayerPrefs.Save();
-            isDirty = false;
-        }
-
-        public GameSettings Load()
-        {
-            Save();
-            musicVolume = PlayerPrefs.GetInt("MusicVolume", musicVolume);
-            soundVolume = PlayerPrefs.GetInt("SoundVolume", soundVolume);
-            audioKeyVolume = PlayerPrefs.GetInt("AudioKeyVolume", audioKeyVolume);
-            mouseSensitivityX = PlayerPrefs.GetFloat("MouseSensitivityX", mouseSensitivityX);
-            mouseSensitivityY = PlayerPrefs.GetFloat("MouseSensitivityY", mouseSensitivityY);
+            if (PlayerPrefs.GetInt("mouseSettingHasBeenChange") == 0)
+            {
+                mouseSensitivityX = 0.5f;
+                mouseSensitivityY = 0.33f;
+                PlayerPrefs.SetFloat("MouseSensitivityX", mouseSensitivityX);
+                PlayerPrefs.SetFloat("MouseSensitivityY", mouseSensitivityY);
+            }
+            else
+            {
+                mouseSensitivityX = PlayerPrefs.GetFloat("MouseSensitivityX");
+                mouseSensitivityY = PlayerPrefs.GetFloat("MouseSensitivityY");
+            }
             isDirty = false;
             return this;
         }

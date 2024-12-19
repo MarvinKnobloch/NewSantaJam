@@ -13,6 +13,7 @@ namespace Santa
         public static GameManager Instance;
         private static GameSettings settings;
         public static bool testMode = false;
+        private bool loadFormMenu;
 
         //public bool spawnAtEnd = false;
 
@@ -73,7 +74,7 @@ namespace Santa
 
             DontDestroyOnLoad(gameObject);
             gameUIChannel.OnEventRaised += ActivateGameUI;
-            settings = new GameSettings().Load();
+            settings = new GameSettings().LoadMouseSetting();
             ResetProgress();
 
             var sceneValues = System.Enum.GetValues(typeof(SceneEnum));
@@ -98,14 +99,32 @@ namespace Santa
         public void LevelStartControllerAwake(LevelStartController levelStart)
         {
             SceneLoaded(levelStart);
+
+            if (AudioController.Instance != null)
+            {
+                int number = SceneManager.GetActiveScene().buildIndex;
+                if (number == (int)SceneEnum.Hauptmenü || number == (int)SceneEnum.IntroSzene || number == (int)SceneEnum.Level1 || number == (int)SceneEnum.Level3 || number == (int)SceneEnum.Level5)
+                {
+                    AudioController.Instance.SetSong((int)AudioController.Songs.song1);
+                }
+                else AudioController.Instance.SetSong((int)AudioController.Songs.song2);
+            }
         }
 
         private void SceneLoaded(LevelStartController levelStart)
         {
             //var currentScene = levelStart.GetScene();
 
+            if (loadFormMenu)
+            {
+                loadFormMenu = false;
+                Vector3 playerPosition = new Vector3(PlayerPrefs.GetFloat("SavePlayerXPosition"), PlayerPrefs.GetFloat("SavePlayerYPosition"), PlayerPrefs.GetFloat("SavePlayerZPosition"));
+                levelStart.transform.SetLocalPositionAndRotation(playerPosition, Quaternion.Euler(0, PlayerPrefs.GetFloat("SavePlayerRotation"), 0));
+
+                CreateCheckpoint(levelStart.gameObject.scene, levelStart.transform);
+            }
             // Gibt es einen Checkpoint?
-            if (checkpoint.active && checkpoint.sceneIndex == levelStart.GetScene())
+            else if (checkpoint.active && checkpoint.sceneIndex == levelStart.GetScene())
             {
                 LoadLastCheckpoint();
                 levelStart.transform.SetLocalPositionAndRotation(checkpoint.position, Quaternion.Euler(0, checkpoint.rotation, 0));
@@ -115,8 +134,8 @@ namespace Santa
                 Debug.Log("Registriere Rücksetzpunkt in Szene " + levelStart.gameObject.scene.name);
                 CreateCheckpoint(levelStart.gameObject.scene, levelStart.transform);
 
-                savestate.sceneIndex = levelStart.GetScene();
-                savestate.Save();
+                //savestate.sceneIndex = levelStart.GetScene();
+                //savestate.Save();
             }
 
             levelStart.CreatePlayer();
@@ -144,24 +163,6 @@ namespace Santa
         {
             gameUI.SetActive(active);
         }
-
-
-        public static void ExitGame()
-        {
-            try
-            {
-                Settings.Save();
-            }
-            finally
-            {
-#if UNITY_EDITOR
-                EditorApplication.isPlaying = false;
-#else
-                Application.Quit();
-#endif
-            }
-        }
-
         public void LoadScene(SceneEnum scene)
         {
 
@@ -184,7 +185,7 @@ namespace Santa
                 catch { /* ignore */ }
             }
             checkpoint.UpdateCheckpoint(scene, playerSpawnpoint, savestate);
-            Settings.Save();
+            //Settings.Save();
         }
 
         public void AddMementoObject(IMemento owner)
@@ -225,6 +226,10 @@ namespace Santa
         {
             checkpoint = new CheckpointData();
             savestate = new Savestate();
+        }
+        public void LoadFormMenu()
+        {
+            loadFormMenu = true;
         }
         #endregion
 
