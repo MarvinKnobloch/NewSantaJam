@@ -165,11 +165,8 @@ public class Player : MonoBehaviour
     {
         if (other.gameObject.TryGetComponent(out IInteractable interactable))
         {
-            Debug.Log("Onexit");
             if (interactionObjs.Contains(interactable))
             {
-                Debug.Log("remove");
-
                 interactionObjs.Remove(interactable);
                 ScanInteractables();
             }

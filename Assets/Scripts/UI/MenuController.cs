@@ -53,7 +53,8 @@ public class MenuController : MonoBehaviour
         {
             if (Player.Instance == null) return;
 
-            if (ingameMenu.activeSelf == false)
+            if (GameManager.Instance.playerUI.messageBox.activeSelf) GameManager.Instance.playerUI.CloseMessageBox();
+            else if (ingameMenu.activeSelf == false)
             {
                 if (gameIsPaused == false)
                 {

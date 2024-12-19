@@ -314,7 +314,11 @@ namespace Santa
             var pressed = ctx.ReadValueAsButton();
             if (pressed)
             {
-                onUse.Invoke();
+                if (GameManager.Instance.playerUI.messageBox.activeSelf) GameManager.Instance.playerUI.CloseMessageBox();
+                else
+                {
+                    onUse.Invoke();
+                }
             }
         }
         private void OnReset(InputAction.CallbackContext ctx)

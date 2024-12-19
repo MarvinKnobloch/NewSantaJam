@@ -771,6 +771,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: 7a6ebf26ff12c234589fee82c4c9c2d6, type: 2}
+  playerUI: {fileID: 2602524892376756761}
   gameUI: {fileID: 6777707621383753880}
   interactionText: {fileID: 4350508405711632956}
   gameUIChannel: {fileID: 11400000, guid: c6718d8eed5477c4bb9ecd3538e3fb43, type: 2}
