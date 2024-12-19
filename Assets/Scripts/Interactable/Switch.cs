@@ -5,15 +5,24 @@ using Santa;
 public class Switch : MonoBehaviour, IInteractable, ITrigger
 {
     public bool activ = false;
+    public Animator animator;
+
+    public AudioClip gearSound;
+    public AudioClip dingSound;
+
     [SerializeField] private GameObject[] objsToActivate;
     [SerializeField] private Switch[] connectedSwitches;
 
     [SerializeField] private bool toggle;
+    private AudioSource audio;
 
     private void Start()
     {
         toggle = activ;
+        audio = GetComponent<AudioSource>();
+        animator = GetComponentInChildren<Animator>();
     }
+
     public bool CanBeTriggered()
     {
         return true;
@@ -62,6 +71,11 @@ public class Switch : MonoBehaviour, IInteractable, ITrigger
                     activate.Activate();
                 }
             }
+            if (animator)
+            {
+                audio.PlayOneShot(gearSound);
+                animator.SetTrigger("ON");
+            }
             AudioController.Instance.PlaySoundOneshot((int)AudioController.Sounds.lever);
         }
         else
@@ -73,7 +87,17 @@ public class Switch : MonoBehaviour, IInteractable, ITrigger
                     activate.Deactivate();
                 }
             }
+            if (animator)
+            {
+                audio.PlayOneShot(gearSound);
+                animator.SetTrigger("OFF");
+            }
             AudioController.Instance.PlaySoundOneshot((int)AudioController.Sounds.lever);
         }
+    }
+
+    public void OnDing()
+    {
+        audio.PlayOneShot(dingSound);
     }
 }
