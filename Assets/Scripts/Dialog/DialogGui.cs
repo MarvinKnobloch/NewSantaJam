@@ -30,6 +30,13 @@ namespace Santa
             root.SetActive(false);
         }
 
+        private void Start()
+        {
+            controls.Dialog.Disable();
+            root.SetActive(false);
+            isDialogActive = false;
+        }
+
         private void OnEnable()
         {
             dialogEventChannel.OnEventRaised += StartDialog;
@@ -91,12 +98,12 @@ namespace Santa
 
         private void OnNextMessage(InputAction.CallbackContext ctx)
         {
-            NextMessage();
+            if (isDialogActive) NextMessage();
         }
 
         private void OnCloseDialog(InputAction.CallbackContext ctx)
         {
-            CloseDialog();
+            if (isDialogActive) CloseDialog();
         }
 
         private void ShowMessagePage(int page)
