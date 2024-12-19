@@ -16,7 +16,7 @@ public class MenuController : MonoBehaviour
 
     private void Awake()
     {
-        controls = Keybindinputmanager.inputActions;
+        controls = Keybindinputmanager.Controls;
         controls.Enable();
 
         if (SceneManager.GetActiveScene().buildIndex == 0)
