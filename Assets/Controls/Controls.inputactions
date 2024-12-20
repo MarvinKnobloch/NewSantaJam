@@ -278,6 +278,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "CollectableReset",
+                    "type": "Button",
+                    "id": "497c7481-ceb3-4cf8-a712-aae0cd62513e",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -300,6 +309,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "CheatMode",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e9fd2797-74ec-4088-929d-d832016d7474",
+                    "path": "<Keyboard>/f5",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CollectableReset",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

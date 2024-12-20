@@ -300,6 +300,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CollectableReset"",
+                    ""type"": ""Button"",
+                    ""id"": ""497c7481-ceb3-4cf8-a712-aae0cd62513e"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -322,6 +331,17 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""CheatMode"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e9fd2797-74ec-4088-929d-d832016d7474"",
+                    ""path"": ""<Keyboard>/f5"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CollectableReset"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -414,6 +434,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         m_Menu_MenuEsc = m_Menu.FindAction("MenuEsc", throwIfNotFound: true);
         m_Menu_CheatMode = m_Menu.FindAction("CheatMode", throwIfNotFound: true);
+        m_Menu_CollectableReset = m_Menu.FindAction("CollectableReset", throwIfNotFound: true);
         // Dialog
         m_Dialog = asset.FindActionMap("Dialog", throwIfNotFound: true);
         m_Dialog_Next = m_Dialog.FindAction("Next", throwIfNotFound: true);
@@ -590,12 +611,14 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private List<IMenuActions> m_MenuActionsCallbackInterfaces = new List<IMenuActions>();
     private readonly InputAction m_Menu_MenuEsc;
     private readonly InputAction m_Menu_CheatMode;
+    private readonly InputAction m_Menu_CollectableReset;
     public struct MenuActions
     {
         private @Controls m_Wrapper;
         public MenuActions(@Controls wrapper) { m_Wrapper = wrapper; }
         public InputAction @MenuEsc => m_Wrapper.m_Menu_MenuEsc;
         public InputAction @CheatMode => m_Wrapper.m_Menu_CheatMode;
+        public InputAction @CollectableReset => m_Wrapper.m_Menu_CollectableReset;
         public InputActionMap Get() { return m_Wrapper.m_Menu; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -611,6 +634,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @CheatMode.started += instance.OnCheatMode;
             @CheatMode.performed += instance.OnCheatMode;
             @CheatMode.canceled += instance.OnCheatMode;
+            @CollectableReset.started += instance.OnCollectableReset;
+            @CollectableReset.performed += instance.OnCollectableReset;
+            @CollectableReset.canceled += instance.OnCollectableReset;
         }
 
         private void UnregisterCallbacks(IMenuActions instance)
@@ -621,6 +647,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @CheatMode.started -= instance.OnCheatMode;
             @CheatMode.performed -= instance.OnCheatMode;
             @CheatMode.canceled -= instance.OnCheatMode;
+            @CollectableReset.started -= instance.OnCollectableReset;
+            @CollectableReset.performed -= instance.OnCollectableReset;
+            @CollectableReset.canceled -= instance.OnCollectableReset;
         }
 
         public void RemoveCallbacks(IMenuActions instance)
@@ -707,6 +736,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     {
         void OnMenuEsc(InputAction.CallbackContext context);
         void OnCheatMode(InputAction.CallbackContext context);
+        void OnCollectableReset(InputAction.CallbackContext context);
     }
     public interface IDialogActions
     {

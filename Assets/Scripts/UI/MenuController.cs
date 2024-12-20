@@ -103,6 +103,11 @@ public class MenuController : MonoBehaviour
             PlayerPrefs.SetInt("DoubleJumpUnlock", 0);
             PlayerPrefs.SetInt("DashUnlock", 0);
 
+            for (int i = 0; i < 15; i++)
+            {
+                PlayerPrefs.SetInt("Collectable" + i, 0);
+            }
+
             PlayerPrefs.SetInt("NewGame", 1);
             SceneManager.LoadScene((int)SceneEnum.Level1); //SceneManager.LoadScene("IntroScene");
         }
