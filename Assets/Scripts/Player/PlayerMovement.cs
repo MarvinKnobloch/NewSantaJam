@@ -117,7 +117,7 @@ public class PlayerMovement
     private void JumpReset()
     {
         if (player.performNormalJump) player.performNormalJump = false;
-        else if (player.canDoubleJump == false) player.performDoubleJump = false;
+        else if (player.performDoubleJump) player.performDoubleJump = false;
     }
     public void Dash()
     {

@@ -403,6 +403,11 @@ namespace Santa
                 toogleAbilities = !toogleAbilities;
             }
         }
+        public void ResetAbilities()
+        {
+            canDoubleJump = true;
+            canDash = true;
+        }
 
         void UpdateBubble()
         {
