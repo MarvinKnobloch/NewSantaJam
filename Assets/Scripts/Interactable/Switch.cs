@@ -73,11 +73,10 @@ public class Switch : MonoBehaviour, IInteractable, ITrigger
             }
             if (animator)
             {
-                audio.clip = gearSound;
-                audio.Play();
+                audio.PlayOneShot(gearSound);
                 animator.SetBool("ON", true);
             }
-            //AudioController.Instance.PlaySoundOneshot((int)AudioController.Sounds.lever);
+            AudioController.Instance.PlaySoundOneshot((int)AudioController.Sounds.lever);
         }
         else
         {
@@ -90,10 +89,10 @@ public class Switch : MonoBehaviour, IInteractable, ITrigger
             }
             if (animator)
             {
-                audio.clip = gearSound;
-                audio.Play();
+                audio.PlayOneShot(gearSound);
                 animator.SetBool("ON", false);
             }
+            AudioController.Instance.PlaySoundOneshot((int)AudioController.Sounds.lever);
         }
     }
 
