@@ -94,6 +94,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SwitchMoveOnActivate (2) Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 7666858412521296441, guid: 46d1e1178c41d7c4c9d4ea9977a94a0b, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 8675a275d916c7a438d9a958ed6da3cb, type: 2}
     - target: {fileID: 8344342361573427295, guid: 46d1e1178c41d7c4c9d4ea9977a94a0b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.42

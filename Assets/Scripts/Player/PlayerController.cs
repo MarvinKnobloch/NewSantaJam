@@ -180,6 +180,7 @@ namespace Santa
                 controls.Menu.CheatMode.performed += OnCheat;
                 controls.Player.WallGrab.performed += OnWallGrab;
                 controls.Player.Reset.performed += OnReset;
+                controls.Menu.CollectableReset.performed += OnCollectableReset;
             }
             else
             {
@@ -190,6 +191,7 @@ namespace Santa
                 controls.Menu.CheatMode.performed -= OnCheat;
                 controls.Player.WallGrab.performed -= OnWallGrab;
                 controls.Player.Reset.performed -= OnReset;
+                controls.Menu.CollectableReset.performed -= OnCollectableReset;
             }
         }
 
@@ -383,26 +385,7 @@ namespace Santa
 
             AudioController.Instance.PlaySoundOneshot((int)AudioController.Sounds.dash);
         }
-        private void OnCheat(InputAction.CallbackContext ctx)
-        {
-            var pressed = ctx.ReadValueAsButton();
-            if (pressed)
-            {
-                if (toogleAbilities)
-                {
-                    PlayerPrefs.SetInt("DoubleJumpUnlock", 1);
-                    PlayerPrefs.SetInt("DashUnlock", 1);
-                    PlayerPrefs.SetInt("WallGrabUnlock", 1);
-                }
-                else
-                {
-                    PlayerPrefs.SetInt("DoubleJumpUnlock", 0);
-                    PlayerPrefs.SetInt("DashUnlock", 0);
-                    PlayerPrefs.SetInt("WallGrabUnlock", 0);
-                }
-                toogleAbilities = !toogleAbilities;
-            }
-        }
+
         public void ResetAbilities()
         {
             canDoubleJump = true;
@@ -427,6 +410,37 @@ namespace Santa
                     playerCollider.excludeLayers = Layers.Mask(myDimensionLayer);
                     currentLayers = bubbleGroundLayers;
                     return;
+                }
+            }
+        }
+        private void OnCheat(InputAction.CallbackContext ctx)
+        {
+            var pressed = ctx.ReadValueAsButton();
+            if (pressed)
+            {
+                if (toogleAbilities)
+                {
+                    PlayerPrefs.SetInt("DoubleJumpUnlock", 1);
+                    PlayerPrefs.SetInt("DashUnlock", 1);
+                    PlayerPrefs.SetInt("WallGrabUnlock", 1);
+                }
+                else
+                {
+                    PlayerPrefs.SetInt("DoubleJumpUnlock", 0);
+                    PlayerPrefs.SetInt("DashUnlock", 0);
+                    PlayerPrefs.SetInt("WallGrabUnlock", 0);
+                }
+                toogleAbilities = !toogleAbilities;
+            }
+        }
+        private void OnCollectableReset(InputAction.CallbackContext ctx)
+        {
+            var pressed = ctx.ReadValueAsButton();
+            if (pressed)
+            {
+                for (int i = 0; i < 15; i++)
+                {
+                    PlayerPrefs.SetInt("Collectable" + i, 0);
                 }
             }
         }

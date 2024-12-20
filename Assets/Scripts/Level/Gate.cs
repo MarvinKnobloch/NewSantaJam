@@ -45,12 +45,25 @@ public class Gate : MonoBehaviour, IActivate
                 break;
         }
     }
+    private void Start()
+    {
+        StartCoroutine(StartCheck());
+    }
+    IEnumerator StartCheck()
+    {
+        yield return null; //new WaitForSeconds(0.05f);
+        CheckRequirements();
+    }
 
     public void Activate()
     {
         currentGoals++;
         TextUpdate();
 
+        CheckRequirements();
+    }
+    public void CheckRequirements()
+    {
         if (currentGoals >= requiredGoals)
         {
             if (timer != 0)
@@ -69,8 +82,6 @@ public class Gate : MonoBehaviour, IActivate
             state = State.moveToEnd;
 
             if (requirementText != null) requirementText.gameObject.SetActive(false);
-            //StopAllCoroutines();
-            //StartCoroutine(MoveGate(startPosi, endPosi, doorOpenDuration));
         }
     }
 
