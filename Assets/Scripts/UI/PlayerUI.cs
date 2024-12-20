@@ -4,7 +4,7 @@ using Events;
 
 public class PlayerUI : MonoBehaviour
 {
-    [SerializeField] private GameObject messageBox;
+    public GameObject messageBox;
     private TextMeshProUGUI messageText;
 
     [SerializeField] private StringEventChannelSO messageBoxChannel;

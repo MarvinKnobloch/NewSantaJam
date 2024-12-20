@@ -22,6 +22,7 @@ namespace Santa
         private new Camera camera;
 
         [Header("UI")]
+        public PlayerUI playerUI;
         [SerializeField] private GameObject gameUI;
         public TextMeshProUGUI interactionText;
 
