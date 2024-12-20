@@ -104,7 +104,8 @@ namespace Santa
             if (AudioController.Instance != null)
             {
                 int number = SceneManager.GetActiveScene().buildIndex;
-                if (number == (int)SceneEnum.Hauptmenü || number == (int)SceneEnum.IntroSzene || number == (int)SceneEnum.Level1 || number == (int)SceneEnum.Level3 || number == (int)SceneEnum.Level5)
+                if (number == (int)SceneEnum.IntroSzene) AudioController.Instance.SetSong((int)AudioController.Songs.empty);
+                else if (number == (int)SceneEnum.Hauptmenü || number == (int)SceneEnum.IntroSzene || number == (int)SceneEnum.Level1 || number == (int)SceneEnum.Level3 || number == (int)SceneEnum.Level5)
                 {
                     AudioController.Instance.SetSong((int)AudioController.Songs.song1);
                 }

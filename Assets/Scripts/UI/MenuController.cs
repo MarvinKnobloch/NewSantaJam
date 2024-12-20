@@ -109,7 +109,7 @@ public class MenuController : MonoBehaviour
             }
 
             PlayerPrefs.SetInt("NewGame", 1);
-            SceneManager.LoadScene((int)SceneEnum.Level1); //SceneManager.LoadScene("IntroScene");
+            SceneManager.LoadScene("IntroScene"); //SceneManager.LoadScene((int)SceneEnum.Level1); //
         }
         else
         {
