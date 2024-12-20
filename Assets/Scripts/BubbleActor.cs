@@ -6,24 +6,26 @@ namespace Santa
     {
         public bool inverted = false;
 
-        private Rigidbody rig;
+        private Collider collider;
 
         void Start()
         {
-            rig = GetComponent<Rigidbody>();
+            collider = GetComponent<Collider>();
         }
 
         void Update()
         {
+            if (!BubbleController.Instance) return;
+
             var myDimensionLayer = inverted ? Layers.Dimension_2 : Layers.Dimension_1;
             var otherDimensionLayer = inverted ? Layers.Dimension_1 : Layers.Dimension_2;
 
-            rig.excludeLayers = Layers.Mask(otherDimensionLayer);
+            collider.excludeLayers = Layers.Mask(otherDimensionLayer);
             for (int i = 0; i < BubbleController.COUNT; i++)
             {
                 if (Vector3.Distance(transform.position, BubbleController.Instance.positions[i]) < BubbleController.Instance.radien[i])
                 {
-                    rig.excludeLayers = Layers.Mask(myDimensionLayer);
+                    collider.excludeLayers = Layers.Mask(myDimensionLayer);
                     return;
                 }
             }
