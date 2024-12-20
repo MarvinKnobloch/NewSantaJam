@@ -30,7 +30,7 @@ public class PlayerCollision
         float height = player.playerCollider.height / 2f - player.playerCollider.radius;
         Vector3 p1 = pos + player.playerCollider.center - Vector3.up * height;
         Vector3 p2 = pos + player.playerCollider.center + Vector3.up * height;
-        if (Physics.CapsuleCast(p1, p2, radius, vel.normalized, out hit, dist, player.groundLayers, QueryTriggerInteraction.Ignore))
+        if (Physics.CapsuleCast(p1, p2, radius, vel.normalized, out hit, dist, player.currentLayers, QueryTriggerInteraction.Ignore))
         {
             player.canPerformWallGrab = false;
 

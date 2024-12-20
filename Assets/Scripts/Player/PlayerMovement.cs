@@ -146,7 +146,7 @@ public class PlayerMovement
             Vector3 p1 = pos + player.playerCollider.center - Vector3.up * height;
             Vector3 p2 = pos + player.playerCollider.center + Vector3.up * height;
 
-            if (Physics.CapsuleCast(p1, p2, radius * 0.5f, Vector3.down, out groundCheck, 1, player.groundLayers, QueryTriggerInteraction.Ignore))
+            if (Physics.CapsuleCast(p1, p2, radius * 0.5f, Vector3.down, out groundCheck, 1, player.currentLayers, QueryTriggerInteraction.Ignore))
             {
                 player.SwitchToGroundState();
             }

@@ -34,7 +34,10 @@ namespace Santa
         [NonSerialized] public bool canDash;
 
         [Range(0f, 1f)] public float groundedDist = 0.03f;
-        public LayerMask groundLayers = Physics.AllLayers;
+        [SerializeField] private LayerMask groundLayers = Physics.AllLayers;
+        [SerializeField] private LayerMask bubbleGroundLayers = Physics.AllLayers;
+
+        [NonSerialized] public LayerMask currentLayers;
 
         #region Properties
         public bool IsGrounded { get; set; }
@@ -108,6 +111,7 @@ namespace Santa
             rig.useGravity = useGravity;
             rig.isKinematic = true;
             rig.freezeRotation = true;
+            currentLayers = groundLayers;
 
             playerMovement.player = this;
             playerCollision.player = this;
@@ -162,6 +166,7 @@ namespace Santa
                     playerMovement.HoldWallGrab();
                     break;
             }
+            UpdateBubble();
         }
 
         public void EnableMovementInputs(bool enabled)
@@ -392,6 +397,28 @@ namespace Santa
                     PlayerPrefs.SetInt("WallGrabUnlock", 0);
                 }
                 toogleAbilities = !toogleAbilities;
+            }
+        }
+
+        void UpdateBubble()
+        {
+            if (!BubbleController.Instance) return;
+
+            var inverted = false;
+            var myDimensionLayer = inverted ? Layers.Dimension_2 : Layers.Dimension_1;
+            var otherDimensionLayer = inverted ? Layers.Dimension_1 : Layers.Dimension_2;
+
+            playerCollider.excludeLayers = Layers.Mask(otherDimensionLayer);
+            currentLayers = groundLayers;
+            for (int i = 0; i < BubbleController.COUNT; i++)
+            {
+                if (Vector3.Distance(transform.position, BubbleController.Instance.positions[i]) < BubbleController.Instance.radien[i])
+                {
+                    Debug.Log("in Bubble");
+                    playerCollider.excludeLayers = Layers.Mask(myDimensionLayer);
+                    currentLayers = bubbleGroundLayers;
+                    return;
+                }
             }
         }
     }
