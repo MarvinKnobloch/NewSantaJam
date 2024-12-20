@@ -137,7 +137,7 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Cut_Position: {r: -0.120000005, g: 0.110000014, b: 1, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Point1: {r: 25, g: 10, b: -15, a: 0}
+    - _Point1: {r: 25, g: 10, b: -30, a: 0}
     - _Point2: {r: 0, g: 0, b: 0, a: 0}
     - _Point3: {r: 0, g: 0, b: 0, a: 0}
     - _Point4: {r: 0, g: 0, b: 0, a: 0}
