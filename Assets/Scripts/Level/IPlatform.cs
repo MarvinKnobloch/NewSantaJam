@@ -6,5 +6,7 @@ namespace Santa
     public interface IPlatform
     {
         public Vector3 velocity {get;}
+
+        public void OnStepOn();
     }
 }
