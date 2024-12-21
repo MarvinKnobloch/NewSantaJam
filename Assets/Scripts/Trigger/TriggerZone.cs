@@ -12,7 +12,7 @@ namespace Santa
         public bool canUsedAsGhost = true;
         public bool deactivateObject = false;
 
-        private bool activated;
+        //private bool activated;
 
         public bool CanBeTriggered()
         {
@@ -23,7 +23,7 @@ namespace Santa
         {
             if (CanBeTriggered())
             {
-                activated = true;
+                //activated = true;
                 if (target) target.SetActive(!deactivateObject);
                 if (TryGetComponent(out AudioSource audio)) audio.Play();
             }

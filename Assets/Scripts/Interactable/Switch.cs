@@ -14,12 +14,12 @@ public class Switch : MonoBehaviour, IInteractable, ITrigger
     [SerializeField] private Switch[] connectedSwitches;
 
     [SerializeField] private bool toggle;
-    private AudioSource audio;
+    private AudioSource audioSource;
 
     private void Start()
     {
         toggle = activ;
-        audio = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
         animator = GetComponentInChildren<Animator>();
     }
 
@@ -73,7 +73,7 @@ public class Switch : MonoBehaviour, IInteractable, ITrigger
             }
             if (animator)
             {
-                audio.PlayOneShot(gearSound);
+                audioSource.PlayOneShot(gearSound);
                 animator.SetBool("ON", true);
             }
             AudioController.Instance.PlaySoundOneshot((int)AudioController.Sounds.lever);
@@ -89,7 +89,7 @@ public class Switch : MonoBehaviour, IInteractable, ITrigger
             }
             if (animator)
             {
-                audio.PlayOneShot(gearSound);
+                audioSource.PlayOneShot(gearSound);
                 animator.SetBool("ON", false);
             }
             AudioController.Instance.PlaySoundOneshot((int)AudioController.Sounds.lever);
@@ -98,6 +98,6 @@ public class Switch : MonoBehaviour, IInteractable, ITrigger
 
     public void OnDing()
     {
-        audio.PlayOneShot(dingSound);
+        audioSource.PlayOneShot(dingSound);
     }
 }

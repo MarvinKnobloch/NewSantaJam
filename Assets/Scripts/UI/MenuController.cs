@@ -35,12 +35,11 @@ public class MenuController : MonoBehaviour
 
         if (PlayerPrefs.GetInt("NewGame") == 0)
         {
-            continueGameButton.interactable = false;
+            continueGameButton.gameObject.SetActive(false);
         }
-
-        if (AudioController.Instance != null)
+        else
         {
-            //Music
+            continueGameButton.gameObject.SetActive(true);
         }
     }
     void Update()

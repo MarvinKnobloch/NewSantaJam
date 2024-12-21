@@ -94,6 +94,11 @@ namespace Santa
             {
                 gameUI.SetActive(true);
             }
+            if (AudioController.Instance != null)
+            {
+                int number = SceneManager.GetActiveScene().buildIndex;
+                if (number == (int)SceneEnum.Hauptmenü) AudioController.Instance.SetSong((int)AudioController.Songs.song1);
+            }
         }
 
         // Wird beim Start jeder neuen Szene aufgerufen

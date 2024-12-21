@@ -9,7 +9,7 @@ namespace Santa
         public float timeToBreak = 1f;
         public float force = 10f;
 
-        private AudioSource audio;
+        private AudioSource audioSource;
         private bool canBeDestructed = true;
 
         public Vector3 velocity => Vector3.zero;
@@ -38,7 +38,7 @@ namespace Santa
 
         IEnumerator BreakSlowly()
         {
-            if (audio) audio.Play();
+            if (audioSource) audioSource.Play();
 
             yield return new WaitForSeconds(timeToBreak);
 

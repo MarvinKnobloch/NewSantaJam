@@ -7,7 +7,7 @@ public class Platform : MonoBehaviour
     private Vector3 endPosi;
     private Vector3 startPosi;
     [SerializeField] private float travelTime;
-    private float timer;
+    //private float timer;
     [SerializeField] private bool moveOnEnter;
 
     private BoxCollider boxCollider;
@@ -24,7 +24,7 @@ public class Platform : MonoBehaviour
         platformObject = transform.GetChild(0).GetComponent<PlatformObject>();
         startPosi = transform.position;
         endPosi = transform.GetChild(1).transform.position;
-        timer = 0;
+        //timer = 0;
 
         boxCollider = GetComponent<BoxCollider>();
         if (boxCollider)

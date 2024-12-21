@@ -6,11 +6,11 @@ namespace Santa
     {
         public bool inverted = false;
 
-        private Collider collider;
+        private Collider _collider;
 
         void Start()
         {
-            collider = GetComponent<Collider>();
+            _collider = GetComponent<Collider>();
         }
 
         void Update()
@@ -20,12 +20,12 @@ namespace Santa
             var myDimensionLayer = inverted ? Layers.Dimension_2 : Layers.Dimension_1;
             var otherDimensionLayer = inverted ? Layers.Dimension_1 : Layers.Dimension_2;
 
-            collider.excludeLayers = Layers.Mask(otherDimensionLayer);
+            _collider.excludeLayers = Layers.Mask(otherDimensionLayer);
             for (int i = 0; i < BubbleController.COUNT; i++)
             {
                 if (Vector3.Distance(transform.position, BubbleController.Instance.positions[i]) < BubbleController.Instance.radien[i])
                 {
-                    collider.excludeLayers = Layers.Mask(myDimensionLayer);
+                    _collider.excludeLayers = Layers.Mask(myDimensionLayer);
                     return;
                 }
             }

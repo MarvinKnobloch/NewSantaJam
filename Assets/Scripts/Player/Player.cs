@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
 {
     public static Player Instance;
 
-    [SerializeField] private float useDist = 2f;
+    //[SerializeField] private float useDist = 2f;
     [SerializeField] private LayerMask useMask;
     [SerializeField] private float deathFallHeight;
     [SerializeField] private float deathHeight = -24f;
