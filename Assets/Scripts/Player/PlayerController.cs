@@ -53,13 +53,12 @@ namespace Santa
 
         [NonSerialized] public Vector3 moveVector = Vector3.zero;
         [NonSerialized] public Vector2 lookVector = Vector2.zero;
-        private float rotationY = 0;
 
         [NonSerialized] public Vector3 velocity;
         [NonSerialized] public float speed;
         [NonSerialized] public Vector3 cameraRotation;
         [NonSerialized] public float fallStartHeight = float.MinValue;
-        //[NonSerialized] public float jumpFrameTimer;
+
         [NonSerialized] public float maxFallSpeed = -2f;
         [NonSerialized] public float jumpPressTime;
         [NonSerialized] public float groundToAirTimer;
@@ -87,8 +86,8 @@ namespace Santa
 
         private bool toogleAbilities;
 
-        private PlayerMovement playerMovement = new PlayerMovement();
-        [NonSerialized] public PlayerCollision playerCollision = new PlayerCollision();
+        private readonly PlayerMovement playerMovement = new PlayerMovement();
+        [NonSerialized] public readonly PlayerCollision playerCollision = new PlayerCollision();
 
         public IntEventChannelSO stateEventChannel;
         public BoolEventChannelSO groundedEventChannel;
@@ -178,7 +177,6 @@ namespace Santa
                 controls.Player.Jump.performed += OnJump;
                 controls.Player.Dash.performed += OnDash;
                 controls.Menu.CheatMode.performed += OnCheat;
-                controls.Player.WallGrab.performed += OnWallGrab;
                 controls.Player.Reset.performed += OnReset;
                 controls.Menu.CollectableReset.performed += OnCollectableReset;
             }
@@ -189,7 +187,6 @@ namespace Santa
                 controls.Player.Jump.performed -= OnJump;
                 controls.Player.Dash.performed -= OnDash;
                 controls.Menu.CheatMode.performed -= OnCheat;
-                controls.Player.WallGrab.performed -= OnWallGrab;
                 controls.Player.Reset.performed -= OnReset;
                 controls.Menu.CollectableReset.performed -= OnCollectableReset;
             }
@@ -270,7 +267,7 @@ namespace Santa
         {
             if (PlayerPrefs.GetInt("DoubleJumpUnlock") == 0) return;
 
-            if (canDoubleJump == false) return;
+            if (!canDoubleJump) return;
             if (performNormalJump) return;
 
             canDoubleJump = false;
@@ -301,21 +298,7 @@ namespace Santa
                 }
             }
         }
-        private void OnWallGrab(InputAction.CallbackContext ctx)
-        {
-            return;
 
-            if (PlayerPrefs.GetInt("WallGrabUnlock") == 0) return;
-
-            var pressed = ctx.ReadValueAsButton();
-            if (pressed)
-            {
-                if (state == States.GroundState) return;
-                if (state == States.DashState) return;
-
-                if (performedWallGrab == false && canPerformWallGrab) SwitchToWallGrab();
-            }
-        }
         private void OnUse(InputAction.CallbackContext ctx)
         {
             var pressed = ctx.ReadValueAsButton();
@@ -331,7 +314,7 @@ namespace Santa
         private void OnReset(InputAction.CallbackContext ctx)
         {
             var pressed = ctx.ReadValueAsButton();
-            if (pressed && resetPerformed == false)
+            if (pressed && !resetPerformed)
             {
                 resetPerformed = true;
                 Player.Instance.die();
@@ -342,6 +325,7 @@ namespace Santa
         {
             return new Vector3(vec.x, 0, vec.z);
         }
+
         public void SwitchToGroundState()
         {
             performedWallGrab = false;
@@ -433,7 +417,7 @@ namespace Santa
                 toogleAbilities = !toogleAbilities;
             }
         }
-        private void OnCollectableReset(InputAction.CallbackContext ctx)
+        private static void OnCollectableReset(InputAction.CallbackContext ctx)
         {
             var pressed = ctx.ReadValueAsButton();
             if (pressed)
