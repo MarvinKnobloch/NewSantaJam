@@ -39,11 +39,6 @@ namespace Santa
 
         [NonSerialized] public LayerMask currentLayers;
 
-        //animation;
-        [NonSerialized] public Animator animator;
-        public string currentstate;
-        const string idlestate = "Idle";
-
         #region Properties
         public bool IsGrounded { get; set; }
         public bool OnSlope { get; private set; }
@@ -116,8 +111,6 @@ namespace Santa
             rig.isKinematic = true;
             rig.freezeRotation = true;
             currentLayers = groundLayers;
-
-            animator = GetComponentInChildren<Animator>();
 
             playerMovement.player = this;
             playerCollision.player = this;
@@ -239,12 +232,7 @@ namespace Santa
             // TWS: Die simpelste Implementierung, die mir spontan einfällt
             playerCam.transform.eulerAngles = cameraRotation;
         }
-        public void ChangeAnimationState(string newstate)
-        {
-            if (currentstate == newstate) return;
-            animator.CrossFadeInFixedTime(newstate, 0.1f);
-            currentstate = newstate;
-        }
+
         private void OnJump(InputAction.CallbackContext ctx)
         {
             var pressed = ctx.ReadValueAsButton();
