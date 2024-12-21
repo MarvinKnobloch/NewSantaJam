@@ -50,9 +50,9 @@ public class PlayerCollision
                 {
                     if (player.IsGrounded && snapToSurface.y < -1f) snapToSurface.y = -1f;
 
-                    if (hit.collider.gameObject.TryGetComponent(out PlatformObject other))
+                    if (hit.collider.gameObject.TryGetComponent(out IPlatform other))
                     {
-                        other.OnMoveEnter();
+                        other.OnStepOn();
 
                         leftOver = other.velocity;
                         leftOver.y = 0;

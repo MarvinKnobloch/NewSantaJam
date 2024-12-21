@@ -80,7 +80,8 @@ namespace Santa
                 else state = nextState;
             }
         }
-        public void OnMoveEnter()
+
+        public void OnStepOn()
         {
             if (moveOnEnter && state == State.dontMove)
             {
