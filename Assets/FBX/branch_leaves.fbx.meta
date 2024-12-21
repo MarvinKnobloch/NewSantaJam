@@ -1,9 +1,19 @@
 fileFormatVersion: 2
-guid: 9d27ebc3d8af7164997c4e58ce1f1ad3
+guid: ff8849f7799142d4699ed899a95e8893
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bq_Leaf_Picea-abies
+    second: {fileID: 2100000, guid: 66aba6784fbf23047bdd5c59f96787b8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: generic_wood_03
+    second: {fileID: 2100000, guid: 2869ea303846d16478d35ca1db203a49, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
