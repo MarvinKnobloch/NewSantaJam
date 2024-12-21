@@ -165,10 +165,10 @@ namespace Santa
         {
             gameUI.SetActive(active);
         }
+
         public void LoadScene(SceneEnum scene)
         {
-
-            Destroy(Player.Instance.gameObject);
+            if (Player.Instance) Destroy(Player.Instance.gameObject);
             SceneManager.LoadScene((int)scene);
         }
 
