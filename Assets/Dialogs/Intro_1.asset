@@ -27,7 +27,7 @@ MonoBehaviour:
   - name: Elf
     text: I'm looking for Santa.
   - name: Elf
-    text: According to the map it should be here some.
+    text: According to the map it should be around here.
   - name: Tia
     text: 'You are looking for a magical place, dummy. A normal map won''t be of
       use to you.

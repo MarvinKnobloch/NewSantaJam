@@ -189,7 +189,7 @@ namespace Santa
                 controls.Player.Dash.performed += OnDash;
                 controls.Menu.CheatMode.performed += OnCheat;
                 controls.Player.Reset.performed += OnReset;
-                controls.Menu.CollectableReset.performed += OnCollectableReset;
+                //controls.Menu.CollectableReset.performed += OnCollectableReset;
             }
             else
             {
@@ -199,7 +199,7 @@ namespace Santa
                 controls.Player.Dash.performed -= OnDash;
                 controls.Menu.CheatMode.performed -= OnCheat;
                 controls.Player.Reset.performed -= OnReset;
-                controls.Menu.CollectableReset.performed -= OnCollectableReset;
+                //controls.Menu.CollectableReset.performed -= OnCollectableReset;
             }
         }
 
@@ -424,6 +424,7 @@ namespace Santa
             var pressed = ctx.ReadValueAsButton();
             if (pressed)
             {
+#if UNITY_EDITOR
                 if (toogleAbilities)
                 {
                     PlayerPrefs.SetInt("DoubleJumpUnlock", 1);
@@ -437,18 +438,19 @@ namespace Santa
                     PlayerPrefs.SetInt("WallGrabUnlock", 0);
                 }
                 toogleAbilities = !toogleAbilities;
+#endif
             }
         }
-        private static void OnCollectableReset(InputAction.CallbackContext ctx)
-        {
-            var pressed = ctx.ReadValueAsButton();
-            if (pressed)
-            {
-                for (int i = 0; i < 15; i++)
-                {
-                    PlayerPrefs.SetInt("Collectable" + i, 0);
-                }
-            }
-        }
+        //private static void OnCollectableReset(InputAction.CallbackContext ctx)
+        //{
+        //    var pressed = ctx.ReadValueAsButton();
+        //    if (pressed)
+        //    {
+        //        for (int i = 0; i < 15; i++)
+        //        {
+        //            PlayerPrefs.SetInt("Collectable" + i, 0);
+        //        }
+        //    }
+        //}
     }
 }
