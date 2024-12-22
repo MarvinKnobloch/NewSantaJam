@@ -32,7 +32,9 @@ public class MenuController : MonoBehaviour
         {
             baseMenu = ingameMenu;
         }
-
+    }
+    private void Start()
+    {
         if (PlayerPrefs.GetInt("NewGame") == 0)
         {
             continueGameButton.gameObject.SetActive(false);
