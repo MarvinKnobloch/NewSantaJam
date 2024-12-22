@@ -1029,6 +1029,89 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 61675823}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &62625627
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1312322210}
+    m_Modifications:
+    - target: {fileID: 383014294194802571, guid: ca1b73050ab808e45ba7e7cb2d2b87b2, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: c7b7cb4b34fd52d4aa30f0c1906fcb86, type: 2}
+    - target: {fileID: 7347066386286363019, guid: ca1b73050ab808e45ba7e7cb2d2b87b2, type: 3}
+      propertyPath: m_Name
+      value: Stoneblock (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7351563715629123555, guid: ca1b73050ab808e45ba7e7cb2d2b87b2, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8722964111010642619, guid: ca1b73050ab808e45ba7e7cb2d2b87b2, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.10000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 8722964111010642619, guid: ca1b73050ab808e45ba7e7cb2d2b87b2, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8722964111010642619, guid: ca1b73050ab808e45ba7e7cb2d2b87b2, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 8722964111010642619, guid: ca1b73050ab808e45ba7e7cb2d2b87b2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.959
+      objectReference: {fileID: 0}
+    - target: {fileID: 8722964111010642619, guid: ca1b73050ab808e45ba7e7cb2d2b87b2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 22.74
+      objectReference: {fileID: 0}
+    - target: {fileID: 8722964111010642619, guid: ca1b73050ab808e45ba7e7cb2d2b87b2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -53.17
+      objectReference: {fileID: 0}
+    - target: {fileID: 8722964111010642619, guid: ca1b73050ab808e45ba7e7cb2d2b87b2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8722964111010642619, guid: ca1b73050ab808e45ba7e7cb2d2b87b2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8722964111010642619, guid: ca1b73050ab808e45ba7e7cb2d2b87b2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8722964111010642619, guid: ca1b73050ab808e45ba7e7cb2d2b87b2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8722964111010642619, guid: ca1b73050ab808e45ba7e7cb2d2b87b2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8722964111010642619, guid: ca1b73050ab808e45ba7e7cb2d2b87b2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8722964111010642619, guid: ca1b73050ab808e45ba7e7cb2d2b87b2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3621433264398260989, guid: ca1b73050ab808e45ba7e7cb2d2b87b2, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ca1b73050ab808e45ba7e7cb2d2b87b2, type: 3}
+--- !u!4 &62625628 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8722964111010642619, guid: ca1b73050ab808e45ba7e7cb2d2b87b2, type: 3}
+  m_PrefabInstance: {fileID: 62625627}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &64678232
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5985,6 +6068,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stoneblock (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 7351563715629123555, guid: ca1b73050ab808e45ba7e7cb2d2b87b2, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7351563715629123555, guid: ca1b73050ab808e45ba7e7cb2d2b87b2, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8722964111010642619, guid: ca1b73050ab808e45ba7e7cb2d2b87b2, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.10000001
@@ -6037,7 +6128,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3621433264398260989, guid: ca1b73050ab808e45ba7e7cb2d2b87b2, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -8040,6 +8132,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stoneblock (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 7351563715629123555, guid: ca1b73050ab808e45ba7e7cb2d2b87b2, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7351563715629123555, guid: ca1b73050ab808e45ba7e7cb2d2b87b2, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8722964111010642619, guid: ca1b73050ab808e45ba7e7cb2d2b87b2, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.10000001
@@ -8092,7 +8192,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3621433264398260989, guid: ca1b73050ab808e45ba7e7cb2d2b87b2, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -9086,6 +9187,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stoneblock
       objectReference: {fileID: 0}
+    - target: {fileID: 7351563715629123555, guid: ca1b73050ab808e45ba7e7cb2d2b87b2, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8722964111010642619, guid: ca1b73050ab808e45ba7e7cb2d2b87b2, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.1
@@ -9138,7 +9243,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3621433264398260989, guid: ca1b73050ab808e45ba7e7cb2d2b87b2, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -11437,6 +11543,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stoneblock (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7351563715629123555, guid: ca1b73050ab808e45ba7e7cb2d2b87b2, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8722964111010642619, guid: ca1b73050ab808e45ba7e7cb2d2b87b2, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.1
@@ -11489,7 +11599,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3621433264398260989, guid: ca1b73050ab808e45ba7e7cb2d2b87b2, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -12539,6 +12650,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stoneblock (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 7351563715629123555, guid: ca1b73050ab808e45ba7e7cb2d2b87b2, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8722964111010642619, guid: ca1b73050ab808e45ba7e7cb2d2b87b2, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.10000001
@@ -12591,7 +12706,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3621433264398260989, guid: ca1b73050ab808e45ba7e7cb2d2b87b2, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -15953,6 +16069,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stoneblock (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 7351563715629123555, guid: ca1b73050ab808e45ba7e7cb2d2b87b2, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7351563715629123555, guid: ca1b73050ab808e45ba7e7cb2d2b87b2, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8722964111010642619, guid: ca1b73050ab808e45ba7e7cb2d2b87b2, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.10000001
@@ -16005,7 +16129,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3621433264398260989, guid: ca1b73050ab808e45ba7e7cb2d2b87b2, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -17194,6 +17319,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stoneblock (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 7351563715629123555, guid: ca1b73050ab808e45ba7e7cb2d2b87b2, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7351563715629123555, guid: ca1b73050ab808e45ba7e7cb2d2b87b2, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8722964111010642619, guid: ca1b73050ab808e45ba7e7cb2d2b87b2, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.10000001
@@ -17246,7 +17379,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3621433264398260989, guid: ca1b73050ab808e45ba7e7cb2d2b87b2, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -18955,6 +19089,7 @@ Transform:
   - {fileID: 165180}
   - {fileID: 1748064512}
   - {fileID: 1892783853}
+  - {fileID: 62625628}
   - {fileID: 854308082}
   - {fileID: 1569414088}
   - {fileID: 1589899526}
@@ -20775,6 +20910,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stoneblock (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 7351563715629123555, guid: ca1b73050ab808e45ba7e7cb2d2b87b2, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7351563715629123555, guid: ca1b73050ab808e45ba7e7cb2d2b87b2, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8722964111010642619, guid: ca1b73050ab808e45ba7e7cb2d2b87b2, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.10000001
@@ -20827,7 +20970,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3621433264398260989, guid: ca1b73050ab808e45ba7e7cb2d2b87b2, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -23734,6 +23878,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stoneblock (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 7351563715629123555, guid: ca1b73050ab808e45ba7e7cb2d2b87b2, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8722964111010642619, guid: ca1b73050ab808e45ba7e7cb2d2b87b2, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.10000001
@@ -23786,7 +23934,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3621433264398260989, guid: ca1b73050ab808e45ba7e7cb2d2b87b2, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -25079,6 +25228,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stoneblock (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 7351563715629123555, guid: ca1b73050ab808e45ba7e7cb2d2b87b2, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8722964111010642619, guid: ca1b73050ab808e45ba7e7cb2d2b87b2, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.10000001
@@ -25131,7 +25284,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3621433264398260989, guid: ca1b73050ab808e45ba7e7cb2d2b87b2, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -26259,7 +26413,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0078639ba2031e249b79934d5f97846e, type: 2}
+  - {fileID: 2100000, guid: bb43b961c4a092d47b265a337150e718, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -26689,6 +26843,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stoneblock (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 7351563715629123555, guid: ca1b73050ab808e45ba7e7cb2d2b87b2, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8722964111010642619, guid: ca1b73050ab808e45ba7e7cb2d2b87b2, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.10000001
@@ -26741,7 +26899,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3621433264398260989, guid: ca1b73050ab808e45ba7e7cb2d2b87b2, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -27451,6 +27610,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stoneblock (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 7351563715629123555, guid: ca1b73050ab808e45ba7e7cb2d2b87b2, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7351563715629123555, guid: ca1b73050ab808e45ba7e7cb2d2b87b2, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8722964111010642619, guid: ca1b73050ab808e45ba7e7cb2d2b87b2, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.10000001
@@ -27503,7 +27670,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3621433264398260989, guid: ca1b73050ab808e45ba7e7cb2d2b87b2, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -29273,11 +29441,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5363015029904961199, guid: 968ed2d9c6ce76043a2783b1d2f67d10, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 17
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5363015029904961199, guid: 968ed2d9c6ce76043a2783b1d2f67d10, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -30485,7 +30653,7 @@ Transform:
   m_GameObject: {fileID: 1876226323292983088}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -60, y: 6.28, z: -18}
+  m_LocalPosition: {x: -60, y: 6, z: -18}
   m_LocalScale: {x: 14, y: 12, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -32174,7 +32342,7 @@ Transform:
   m_GameObject: {fileID: 5005109911123978591}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -60, y: 6.28, z: 18}
+  m_LocalPosition: {x: -60, y: 6, z: 18}
   m_LocalScale: {x: 14, y: 12, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
