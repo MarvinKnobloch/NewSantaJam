@@ -22,12 +22,14 @@ MonoBehaviour:
 
       A ... cat?'
   - name: Tia
-    text: "It seems, you didn't expect that! \nYou are looking for something 
-      extraordinary, aren't you?"
+    text: "It seems, you didn't expect that! \nYou are looking for something extraordinary,
+      aren't you?"
   - name: Elf
     text: I'm looking for Santa.
   - name: Elf
     text: According to the map it should be here some.
   - name: Tia
-    text: "You are looking for a magical place, dummy. A normal map won't be of use 
-      to you.\nWhat you need, is magic!"
+    text: 'You are looking for a magical place, dummy. A normal map won''t be of
+      use to you.
+
+      What you need, is magic!'
