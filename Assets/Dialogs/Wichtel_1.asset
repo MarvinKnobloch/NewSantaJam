@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Wichtel_1
   m_EditorClassIdentifier: 
   messages:
-  - name: Wichtel 1
-    text: Bitte alle Besucher zuerst am Empfang anmelden.
+  - name: Imp #01
+    text: All visitors must report at the reception first.
