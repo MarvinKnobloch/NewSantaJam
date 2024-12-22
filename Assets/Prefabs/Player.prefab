@@ -800,7 +800,7 @@ MonoBehaviour:
   minCameraAngle: -40
   useGravity: 1
   gravityFactor: 0.15
-  stickToGroundForce: 2
+  stickToGroundForce: 0.2
   skinWidth: 0.01
   stepHeight: 0.2
   dashStrength: 25
@@ -812,6 +812,7 @@ MonoBehaviour:
   bubbleGroundLayers:
     serializedVersion: 2
     m_Bits: 16247
+  currentstate: 
   performNormalJump: 0
   canDoubleJump: 0
   performDoubleJump: 0
@@ -833,7 +834,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1009ee236565c16429c8a87f5eed5292, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useDist: 2
   useMask:
     serializedVersion: 2
     m_Bits: 4096

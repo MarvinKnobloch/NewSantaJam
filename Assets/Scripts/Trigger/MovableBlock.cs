@@ -44,7 +44,7 @@ namespace Santa
 
         public void Trigger(MonoBehaviour user, TriggerCommand cmd)
         {
-            Debug.Log("MovableBlock Triggered " + user.name);
+            //Debug.Log("MovableBlock Triggered " + user.name);
             if (user.gameObject.layer == Layers.Spieler)
             {
                 var pos = transform.position;
