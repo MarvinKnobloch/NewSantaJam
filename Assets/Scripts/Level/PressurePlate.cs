@@ -31,6 +31,7 @@ public class PressurePlate : MonoBehaviour
                     }
                     transform.position = endPosi;
                 }
+                AudioController.Instance.PlaySoundOneshot((int)AudioController.Sounds.lever);
             }
         }
     }
