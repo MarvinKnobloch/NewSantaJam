@@ -237,10 +237,12 @@ namespace Santa
             cameraRotation = GameManager.Camera.transform.eulerAngles;
         }
 
-        public void ChangeAnimationState(string newstate)
+        public void ChangeAnimationState(string newstate, float time = 0.15f)
         {
             if (currentstate == newstate) return;
-            animator.CrossFadeInFixedTime(newstate, 0.1f);
+
+            Debug.Log("Change Animation State: " + newstate);
+            animator.CrossFadeInFixedTime(newstate, time);
             currentstate = newstate;
         }
         private void LateUpdate()
