@@ -9,7 +9,10 @@ public class PlayerMovement
     const string runState = "Run";
     const string jumpState = "Jump";
     const string dashState = "Dash";
-    const string fallState = "Fall";
+    public const string fallState = "Midair";
+    const string landState = "Landing";
+
+    private float landTimer = 0;
 
     public void Movement()
     {
@@ -43,6 +46,8 @@ public class PlayerMovement
             if (player.state != PlayerController.States.DashState)
             {
                 player.SwitchToGroundState();
+                player.ChangeAnimationState(landState);
+                landTimer = 1f;
             }
 
             var fallDist = (player.fallStartHeight - player.transform.position.y);
@@ -51,7 +56,12 @@ public class PlayerMovement
 
             player.groundedEventChannel.RaiseEvent(player.IsGrounded);
         }
+        if (player.IsGrounded && landTimer > 0)
+        {
+            landTimer -= Time.fixedDeltaTime;
+        }
 
+        player.animator.SetFloat("Forward", Vector3.Dot(player.transform.forward, player.velocity));
         player.rig.MovePosition(player.rig.position + movement);
     }
 
@@ -70,6 +80,7 @@ public class PlayerMovement
     {
         player.velocity.y = -player.stickToGroundForce;
 
+        if (player.currentstate == landState && landTimer > 0) return;
         if (player.moveVector != Vector3.zero) player.ChangeAnimationState(runState);
         else player.ChangeAnimationState(idleState);
     }

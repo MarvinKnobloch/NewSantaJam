@@ -112,7 +112,7 @@ Material:
     - _Parallax: 0.005
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Radius1: 10
+    - _Radius1: 50
     - _Radius2: 0
     - _Radius3: 0
     - _Radius4: 0
@@ -137,7 +137,7 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Cut_Position: {r: -0.120000005, g: 0.110000014, b: 1, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Point1: {r: -7.218192, g: 39, b: -28, a: 0}
+    - _Point1: {r: 5, g: 4, b: -10, a: 0}
     - _Point2: {r: 0, g: 0, b: 0, a: 0}
     - _Point3: {r: 0, g: 0, b: 0, a: 0}
     - _Point4: {r: 0, g: 0, b: 0, a: 0}
