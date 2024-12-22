@@ -32,9 +32,7 @@ public class MenuController : MonoBehaviour
         {
             baseMenu = ingameMenu;
         }
-    }
-    private void Start()
-    {
+
         if (PlayerPrefs.GetInt("NewGame") == 0)
         {
             continueGameButton.gameObject.SetActive(false);
@@ -159,6 +157,15 @@ public class MenuController : MonoBehaviour
 
         gameIsPaused = false;
         Time.timeScale = 1;
+
+        if (PlayerPrefs.GetInt("NewGame") == 0)
+        {
+            continueGameButton.gameObject.SetActive(false);
+        }
+        else
+        {
+            continueGameButton.gameObject.SetActive(true);
+        }
 
         GameManager.Instance.LoadScene(SceneEnum.Hauptmenü);
     }
