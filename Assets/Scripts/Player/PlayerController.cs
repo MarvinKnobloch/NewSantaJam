@@ -122,6 +122,8 @@ namespace Santa
 
             playerMovement.player = this;
             playerCollision.player = this;
+
+            state = States.AirState;
         }
 
 
