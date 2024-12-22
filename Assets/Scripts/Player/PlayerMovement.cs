@@ -5,6 +5,12 @@ public class PlayerMovement
 {
     public PlayerController player;
 
+    const string idleState = "Idle";
+    const string runState = "Run";
+    const string jumpState = "Jump";
+    const string dashState = "Dash";
+    const string fallState = "Fall";
+
     public void Movement()
     {
         var currentVelocity = player.velocity;
@@ -63,6 +69,9 @@ public class PlayerMovement
     public void GroundMovement()
     {
         player.velocity.y = -player.stickToGroundForce;
+
+        if (player.moveVector != Vector3.zero) player.ChangeAnimationState(runState);
+        else player.ChangeAnimationState(idleState);
     }
     public void GroundToAir()
     {
@@ -70,10 +79,14 @@ public class PlayerMovement
 
         PlayerFall();
 
+        if (player.velocity.y > 0) player.ChangeAnimationState(jumpState);
+        else player.ChangeAnimationState(fallState);
+
         if(player.groundToAirTimer > player.offGroundJumpDelay)
         {
             player.SwitchToAirState();
         }
+
     }
     public void AirMovement()
     {
@@ -88,6 +101,9 @@ public class PlayerMovement
         {
             player.fallStartHeight = player.transform.position.y;
         }
+
+        if (player.velocity.y > 0) player.ChangeAnimationState(jumpState);
+        else player.ChangeAnimationState(fallState);
     }
     private void Jump()
     {

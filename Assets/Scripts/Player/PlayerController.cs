@@ -39,6 +39,11 @@ namespace Santa
 
         [NonSerialized] public LayerMask currentLayers;
 
+        //animation;
+        [NonSerialized] public Animator animator;
+        public string currentstate;
+        const string idlestate = "Idle";
+
         #region Properties
         public bool IsGrounded { get; set; }
         public bool OnSlope { get; private set; }
@@ -111,6 +116,9 @@ namespace Santa
             rig.isKinematic = true;
             rig.freezeRotation = true;
             currentLayers = groundLayers;
+
+            animator = GetComponentInChildren<Animator>();
+            currentstate = idlestate;
 
             playerMovement.player = this;
             playerCollision.player = this;
@@ -227,6 +235,12 @@ namespace Santa
             cameraRotation = GameManager.Camera.transform.eulerAngles;
         }
 
+        public void ChangeAnimationState(string newstate)
+        {
+            if (currentstate == newstate) return;
+            animator.CrossFadeInFixedTime(newstate, 0.1f);
+            currentstate = newstate;
+        }
         private void LateUpdate()
         {
             // TWS: Die simpelste Implementierung, die mir spontan einfällt
@@ -328,6 +342,8 @@ namespace Santa
 
         public void SwitchToGroundState()
         {
+            velocity.y = 0;
+
             performedWallGrab = false;
             canDash = true;
             canDoubleJump = true;
