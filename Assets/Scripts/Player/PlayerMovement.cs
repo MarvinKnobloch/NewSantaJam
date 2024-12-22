@@ -8,7 +8,6 @@ public class PlayerMovement
     const string idleState = "Idle";
     const string runState = "Run";
     const string jumpState = "Jump";
-    const string dashState = "Dash";
     public const string fallState = "Midair";
     const string landState = "Landing";
 
