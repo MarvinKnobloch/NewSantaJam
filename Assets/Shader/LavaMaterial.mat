@@ -62,7 +62,7 @@ Material:
     - _Smoothness: 0
     m_Colors:
     - _EmissionColor: {r: 7.999999, g: 0.60682744, b: 0, a: 0}
-    - _Float: {r: 0.1, g: 0.025, b: 0, a: 0}
+    - _Float: {r: 0.01, g: 0.005, b: 0, a: 0}
     - _MainColor: {r: 1, g: 0, b: 0, a: 1}
     - _SecondColor: {r: 0.14150935, g: 0.13852257, b: 0.13416687, a: 0}
     - _Tilling: {r: 2, g: 2, b: 0, a: 0}
