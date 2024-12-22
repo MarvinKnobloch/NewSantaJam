@@ -13,21 +13,21 @@ MonoBehaviour:
   m_Name: Intro_1
   m_EditorClassIdentifier: 
   messages:
-  - name: Junge
-    text: Hier sollte es irgendwo sein.
-  - name: Katze
-    text: Suchst du etwas?
-  - name: Junge
-    text: 'Huch?!
+  - name: Elf
+    text: It should be here somewhere.
+  - name: Tia
+    text: Looking for something~?
+  - name: Elf
+    text: 'Huh?!
 
-      Eine ... Katze?'
-  - name: Katze
-    text: "Mir scheint, das hast du nicht erwartet.\nDabei bist du doch auf der Suche
-      nach etwas Umgew\xF6hnlichem, nicht wahr?"
-  - name: Junge
-    text: Ich suche nach dem Weihnachtsmann.
-  - name: Junge
-    text: Der Karte nach muss das hier irgendwo sein.
-  - name: Katze
-    text: "Du suchst nach einem Magischen Ort. Eine gew\xF6hnliche Karte wird dir
-      dabei nicht helfen.\nWas du brauchst, ist etwas Magie."
+      A ... cat?'
+  - name: Tia
+    text: "It seems, you didn't expect that! \nYou are looking for something 
+      extraordinary, aren't you?"
+  - name: Elf
+    text: I'm looking for Santa.
+  - name: Elf
+    text: According to the map it should be here some.
+  - name: Tia
+    text: "You are looking for a magical place, dummy. A normal map won't be of use 
+      to you.\nWhat you need, is magic!"
