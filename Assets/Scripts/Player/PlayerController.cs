@@ -43,6 +43,7 @@ namespace Santa
         [NonSerialized] public Animator animator;
         public string currentstate;
         const string idlestate = "Idle";
+        const string dashState = "Dash";
 
         #region Properties
         public bool IsGrounded { get; set; }
@@ -312,6 +313,7 @@ namespace Santa
 
                 if (canDash)
                 {
+                    ChangeAnimationState(dashState);
                     StartDash();
                 }
             }
