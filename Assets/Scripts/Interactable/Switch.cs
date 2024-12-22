@@ -5,6 +5,7 @@ using Santa;
 public class Switch : MonoBehaviour, IInteractable, ITrigger
 {
     public bool activ = false;
+    public bool onlyOnce = false;
     public Animator animator;
 
     public AudioClip gearSound;
@@ -25,12 +26,12 @@ public class Switch : MonoBehaviour, IInteractable, ITrigger
 
     public bool CanBeTriggered()
     {
-        return true;
+        return !onlyOnce || !activ;
     }
 
     public bool CanInteractWith(MonoBehaviour user)
     {
-        return true;
+        return CanBeTriggered();
     }
 
     public string GetInteractionHint()
@@ -48,6 +49,7 @@ public class Switch : MonoBehaviour, IInteractable, ITrigger
 
     public void Trigger(MonoBehaviour user, TriggerCommand cmd)
     {
+        if (!CanBeTriggered()) return;
         switch (cmd)
         {
             case TriggerCommand.Toggle: 

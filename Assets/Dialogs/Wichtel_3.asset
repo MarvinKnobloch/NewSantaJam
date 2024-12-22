@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Wichtel_3
   m_EditorClassIdentifier: 
   messages:
-  - name: Wichtel 3
-    text: Das soll ein Schalter sein. Wir waren knapp an Artists.
+  - name: Cat #03
+    text: This is supposed to be a lever. It looks funny, but is real!
